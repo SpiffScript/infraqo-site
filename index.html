@@ -1,134 +1,106 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
 
-<!-- Preconnects for performance -->
-<link rel="preconnect" href="https://www.googletagmanager.com" />
-<link rel="preconnect" href="https://www.google.com" />
-<link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <!-- Preconnects for performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
 
-<!-- DNS Prefetch (lightweight hint) -->
-<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-<link rel="dns-prefetch" href="https://www.google.com" />
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.google.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
 
-  <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGNJ3Q6GPS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Tailwind via CDN (this is what actually styles your classes) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
-  gtag('config', 'G-TGNJ3Q6GPS', { send_page_view: true });
-</script>
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TGNJ3Q6GPS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-TGNJ3Q6GPS", { send_page_view: true });
+    </script>
 
-  <!-- FAVICONS -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-  <!-- PRIMARY SEO META TAGS -->
-  <title>InfraQo – Structured Cabling, IT Support & Network Infrastructure Services Across the Front Range</title>
-  <meta name="description" content="InfraQo provides structured cabling, network setup, IT support, camera systems, and managed business services across Denver and Colorado’s Front Range. We deliver reliable, clean installations and responsive support for residential, commercial and small business clients.">
-  
-  <!-- KEYWORDS -->
-  <meta name="keywords" content="structured cabling, low voltage, IT support, network setup, Denver IT services, camera systems, access points, business infrastructure, managed services, Colorado cabling, tech installation, InfraQo">
+    <!-- Primary SEO Meta -->
+    <title>
+      InfraQo – Structured Cabling, IT Support & Network Infrastructure Services
+      Across the Front Range
+    </title>
+    <meta
+      name="description"
+      content="InfraQo provides structured cabling, managed network services, IT support, and low-voltage infrastructure for businesses and homeowners across Colorado’s Front Range. Reliable installs, clean racks, and honest communication."
+    />
 
-  <!-- VIEWPORT -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="keywords"
+      content="structured cabling, low-voltage cabling, network infrastructure, managed network services, IT support, camera systems, Wi-Fi design, network cleanup, Colorado Front Range, InfraQo"
+    />
 
-  <!-- AUTHOR -->
-  <meta name="author" content="InfraQo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="InfraQo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
 
-  <!-- ROBOTS -->
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://infraqo.com" />
 
-  <!-- CANONICAL URL -->
-  <link rel="canonical" href="https://www.infraqo.com">
+    <meta name="theme-color" content="#0f172a" />
 
-  <!-- THEME COLOR -->
-  <meta name="theme-color" content="#0f172a">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="InfraQo" />
+    <meta
+      property="og:title"
+      content="InfraQo – Structured Cabling, IT Support & Network Infrastructure Services Across the Front Range"
+    />
+    <meta
+      property="og:description"
+      content="InfraQo designs and installs structured cabling, Wi-Fi, security cameras, and managed IT support for businesses and homes along the Front Range. Clean work, clear communication, and networks built to last."
+    />
+    <meta property="og:url" content="https://infraqo.com" />
+    <meta property="og:image" content="https://infraqo.com/og-image.png" />
 
-  <!-- OPEN GRAPH / SOCIAL SHARE META -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="InfraQo">
-  <meta property="og:title" content="InfraQo – Structured Cabling, IT Support & Business Infrastructure Services">
-  <meta property="og:description" content="Structured cabling, low-voltage installation, network setup, camera systems, and managed business services across Denver and the Colorado Front Range. Reliable, clean installs.">
-  <meta property="og:url" content="https://infraqo.com">
-  <meta property="og:image" content="/og-image.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="InfraQo – Structured Cabling, IT Support & Network Infrastructure Services Across the Front Range"
+    />
+    <meta
+      name="twitter:description"
+      content="InfraQo designs and installs structured cabling, Wi-Fi, security cameras, and managed IT support for businesses and homes along the Front Range."
+    />
+    <meta name="twitter:image" content="https://infraqo.com/og-image.png" />
+    <meta name="twitter:site" content="@infraqo" />
 
-  <!-- TWITTER / X CARD -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="InfraQo – Structured Cabling & Business Infrastructure Services">
-  <meta name="twitter:description" content="Structured cabling, network setup, IT support, camera installs, and business services across the Front Range.">
-  <meta name="twitter:image" content="https://infraqo.com/og-image.png">
-  <meta name="twitter:site" content="@infraqo">
+    <!-- Import map for React from CDN -->
 
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "InfraQo",
-  "url": "https://infraqo.com/",
-  "description": "InfraQo provides structured cabling, network setup, IT support, camera systems, and managed business services across Denver and Colorado’s Front Range. We deliver reliable, clean installations and responsive support for commercial and small business clients.",
-  "image": "https://infraqo.com/og-image.png",
-  "logo": "https://infraqo.com/og-image.png",
-  "areaServed": {
-    "@type": "Place",
-    "name": "Denver and Colorado Front Range"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Denver",
-    "addressRegion": "CO",
-    "addressCountry": "US"
-  },
-  "sameAs": [
-    "https://twitter.com/InfraQo",
-    "https://www.linkedin.com/company/infraqo",
-    "https://www.facebook.com/infraqo"
-  ],
-  "serviceType": [
-    "Structured cabling",
-    "Low-voltage cabling",
-    "Network setup",
-    "IT support services",
-    "Camera systems and surveillance",
-    "Managed business and IT services"
-  ]
-}
-</script>
-
-  <!-- RECAPTCHA -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-  <!-- TAILWIND -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
-
-  <!-- IMPORT MAP -->
-
-
-  <script type="importmap">
-  {
-    "imports": {
-      "react": "https://aistudiocdn.com/react@^19.2.0",
-      "react/": "https://aistudiocdn.com/react@^19.2.0/",
-      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-    }
-  }
-  </script>
-  <script type="module" crossorigin src="/assets/index-CqBCF7LR.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-tn0RQdqM.css">
-</head>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://aistudiocdn.com/react@^19.2.0",
+          "react/": "https://aistudiocdn.com/react@^19.2.0/",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-agRKqJLX.js"></script>
+  </head>
 
   <body>
     <div id="root"></div>
-</body>
+  </body>
 </html>
