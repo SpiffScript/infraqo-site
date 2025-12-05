@@ -1,0 +1,36 @@
+.service-line:hover .service-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #2563eb; /* blue-600 */
+}
+
+.service-line:hover .service-text {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Outer shell: just clipping + hover control */
+.logo-marquee {
+  overflow: hidden;
+}
+
+/* Inner track */
+.logo-track {
+  display: flex;
+  min-width: max-content;
+  animation: logo-marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee:hover .logo-track {
+  animation-play-state: paused;
+}
