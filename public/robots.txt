@@ -1,4 +1,57 @@
+# InfraQo Robots.txt
+# Purpose: Allow search indexing, block AI model training, and protect proprietary content.
+
+# -----------------------------
+# ALLOW SEARCH ENGINE CRAWLING
+# -----------------------------
 User-agent: *
 Allow: /
 
+# ------------------------------------------------
+# BLOCK AI TRAINING & MASS SCRAPING CRAWLERS
+# (Protects proprietary content from model ingestion)
+# ------------------------------------------------
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Disallow: /
+
+# Google AI (Gemini / Vertex AI data extensions)
+User-agent: Google-Extended
+Disallow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Disallow: /
+
+# Meta (LLaMA / Meta AI)
+User-agent: meta-externalagent
+Disallow: /
+
+# Apple (Apple Intelligence extended dataset)
+User-agent: Applebot-Extended
+Disallow: /
+
+# Amazon (Amazonbot AI training branch)
+User-agent: Amazonbot
+Disallow: /
+
+# ByteDance (TikTok scraping bot)
+User-agent: Bytespider
+Disallow: /
+
+# CommonCrawl (feeds many AI models)
+User-agent: CCBot
+Disallow: /
+
+# -----------------------------
+# SITEMAP LOCATION
+# -----------------------------
 Sitemap: https://infraqo.com/sitemap.xml
+
+# ------------------------------------------------
+# LEGAL NOTICE (Non-technical, advisory)
+# ------------------------------------------------
+# By accessing this domain, automated agents agree not to collect, 
+# store, or use InfraQo content for AI model training or derivative works.
+# Search engine bots are exempt and permitted for indexing and ranking.
