@@ -14,7 +14,7 @@ const ServiceDomains: React.FC = () => {
 
     <p className="text-sm text-slate-500 mt-1">powered by,</p>
 
-    <div className="mt-6 flex justify-center items-center gap-16">
+    <div className="mt-6 flex justify-center items-center gap-24">
       <img
         src={GoogleLogo}
         alt="Google Workspace"
