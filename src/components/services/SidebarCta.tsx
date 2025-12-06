@@ -15,7 +15,7 @@ const SidebarCta: React.FC = () => {
       </p>
 
       <div className="mt-7 flex flex-col gap-3">
-        <CtaButton href="#contact" variant="glow" className="w-full">
+        <CtaButton href="/contact" variant="glow" className="w-full">
             Start Your Project
         </CtaButton>
 
