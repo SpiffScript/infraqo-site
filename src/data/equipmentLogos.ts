@@ -1,67 +1,40 @@
-// Equipment / vendor logos
-import AcerLogo from "../assets/images/equipment/Acer-Inc-Logo.svg";
-import AmdLogo from "../assets/images/equipment/Advanced-Micro-Devices-Logo.svg";
-import AocLogo from "../assets/images/equipment/AOC-International-Logo.svg";
-import ApcLogo from "../assets/images/equipment/APC-by-Schneider-Electric-Logo.svg";
-import AppleLogo from "../assets/images/equipment/Apple-Inc-Logo.svg";
-import AsusLogo from "../assets/images/equipment/Asus-Logo.svg";
-import BenqLogo from "../assets/images/equipment/BenQ-Logo.svg";
-import CiscoLogo from "../assets/images/equipment/Cisco-Systems-Logo.svg";
-import DellLogo from "../assets/images/equipment/Dell-Logo.svg";
-import FortinetLogo from "../assets/images/equipment/Fortinet-Logo.svg";
-import FujitsuLogo from "../assets/images/equipment/Fujitsu-Logo.svg";
-import IbmLogo from "../assets/images/equipment/IBM-Logo.svg";
-import LinksysLogo from "../assets/images/equipment/Linksys-Logo.svg";
-import NetgearLogo from "../assets/images/equipment/Netgear-Logo.svg";
-import PaloAltoLogo from "../assets/images/equipment/Palo-Alto-Networks-Logo.svg";
-import SeagateLogo from "../assets/images/equipment/Seagate-Technology-Logo.svg";
-import TpLinkLogo from "../assets/images/equipment/TP-Link-Logo.svg";
-import UbiquitiLogo from "../assets/images/equipment/Ubiquiti-Networks-Logo.svg";
-import WesternDigitalLogo from "../assets/images/equipment/Western-Digital-Logo.svg";
-import SamsungLogo from "../assets/images/equipment/Samsung-Logo.svg";
-import BrotherLogo from "../assets/images/equipment/Brother-Logo.svg";
-import HpEnterpriseLogo from "../assets/images/equipment/HP-Enterprise-Logo.svg";
-import IntelLogo from "../assets/images/equipment/Intel-Logo.svg";
-import LegrandLogo from "../assets/images/equipment/Legrand-Logo.svg";
-import LenovoLogo from "../assets/images/equipment/Lenovo-Logo.svg";
-import LGCorporationLogo from "../assets/images/equipment/LG-Corporation-Logo.svg";
-import LogitechLogo from "../assets/images/equipment/Logitech-Logo.svg";
-import SynologyLogo from "../assets/images/equipment/Synology-Logo.svg";
-import ThinkPadLogo from "../assets/images/equipment/ThinkPad-Logo.svg";
-import VivoLogo from "../assets/images/equipment/Vivo-Logo.svg";
+export interface EquipmentLogo {
+  src: string;
+  alt: string;
+}
 
-const orderedLogos = [
-  { src: AcerLogo, alt: "Acer" },
-  { src: AmdLogo, alt: "Advanced Micro Devices (AMD)" },
-  { src: AocLogo, alt: "AOC" },
-  { src: ApcLogo, alt: "APC by Schneider Electric" },
-  { src: AppleLogo, alt: "Apple" },
-  { src: AsusLogo, alt: "Asus" },
-  { src: BenqLogo, alt: "BenQ" },
-  { src: CiscoLogo, alt: "Cisco Systems" },
-  { src: DellLogo, alt: "Dell" },
-  { src: FortinetLogo, alt: "Fortinet" },
-  { src: FujitsuLogo, alt: "Fujitsu" },
-  { src: IbmLogo, alt: "IBM" },
-  { src: LinksysLogo, alt: "Linksys" },
-  { src: NetgearLogo, alt: "Netgear" },
-  { src: PaloAltoLogo, alt: "Palo Alto Networks" },
-  { src: SeagateLogo, alt: "Seagate Technology" },
-  { src: TpLinkLogo, alt: "TP-Link" },
-  { src: UbiquitiLogo, alt: "Ubiquiti Networks" },
-  { src: WesternDigitalLogo, alt: "Western Digital" },
-  { src: SamsungLogo, alt: "Samsung" },
-  { src: BrotherLogo, alt: "Brother" },
-  { src: HpEnterpriseLogo, alt: "HP Enterprise" },
-  { src: IntelLogo, alt: "Intel" },
-  { src: LegrandLogo, alt: "Legrand" },
-  { src: LenovoLogo, alt: "Lenovo" },
-  { src: LGCorporationLogo, alt: "LG Corporation" },
-  { src: LogitechLogo, alt: "Logitech" },
-  { src: SynologyLogo, alt: "Synology" },
-  { src: ThinkPadLogo, alt: "ThinkPad" },
-  { src: VivoLogo, alt: "Vivo" },
+// Logos live in /public/images/brands
+const orderedLogos: EquipmentLogo[] = [
+  { src: "/images/brands/AcerIncLogo.svg", alt: "Acer" },
+  { src: "/images/brands/AdvancedMicroDevicesLogo.svg", alt: "Advanced Micro Devices (AMD)" },
+  { src: "/images/brands/AOCInternationalLogo.svg", alt: "AOC" },
+  { src: "/images/brands/APCbySchneiderElectricLogo.svg", alt: "APC by Schneider Electric" },
+  { src: "/images/brands/AppleIncLogo.svg", alt: "Apple" },
+  { src: "/images/brands/AsusLogo.svg", alt: "Asus" },
+  { src: "/images/brands/BenQLogo.svg", alt: "BenQ" },
+  { src: "/images/brands/BrotherLogo.svg", alt: "Brother" },
+  { src: "/images/brands/CiscoSystemsLogo.svg", alt: "Cisco Systems" },
+  { src: "/images/brands/DellLogo.svg", alt: "Dell" },
+  { src: "/images/brands/FortinetLogo.svg", alt: "Fortinet" },
+  { src: "/images/brands/FujitsuLogo.svg", alt: "Fujitsu" },
+  { src: "/images/brands/IBMLogo.svg", alt: "IBM" },
+  { src: "/images/brands/IntelLogo.svg", alt: "Intel" },
+  { src: "/images/brands/LenovoLogo.svg", alt: "Lenovo" },
+  { src: "/images/brands/LGCorporationLogo.svg", alt: "LG Corporation" },
+  { src: "/images/brands/LinksysLogo.svg", alt: "Linksys" },
+  { src: "/images/brands/LogitechLogo.svg", alt: "Logitech" },
+  { src: "/images/brands/NetgearLogo.svg", alt: "Netgear" },
+  { src: "/images/brands/PaloAltoNetworksLogo.svg", alt: "Palo Alto Networks" },
+  { src: "/images/brands/SamsungLogo.svg", alt: "Samsung" },
+  { src: "/images/brands/SeagateTechnologyLogo.svg", alt: "Seagate Technology" },
+  { src: "/images/brands/SynologyLogo.svg", alt: "Synology" },
+  { src: "/images/brands/ThinkPadLogo.svg", alt: "ThinkPad" },
+  { src: "/images/brands/TPLinkLogo.svg", alt: "TP-Link" },
+  { src: "/images/brands/UbiquitiNetworksLogo.svg", alt: "Ubiquiti Networks" },
+  { src: "/images/brands/VivoLogo.svg", alt: "Vivo" },
+  { src: "/images/brands/WesternDigitalLogo.svg", alt: "Western Digital" },
 ];
+
 
 // Fisher–Yates shuffle
 function shuffle<T>(array: T[]): T[] {

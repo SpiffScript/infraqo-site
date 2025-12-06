@@ -1,9 +1,6 @@
 // src/components/services/ServiceDomains.tsx
 import React from "react";
 
-import GoogleLogo from "../../assets/images/services/partners/google-workspace.svg";
-import MicrosoftLogo from "../../assets/images/services/partners/microsoft-365.svg";
-
 const ServiceDomains: React.FC = () => {
   return (
     <div className="w-full flex justify-center mt-12">
@@ -16,12 +13,12 @@ const ServiceDomains: React.FC = () => {
 
     <div className="mt-6 flex justify-center items-center gap-24">
       <img
-        src={GoogleLogo}
+        src="/images/vendors/googleworkspace.svg"
         alt="Google Workspace"
         className="h-5 sm:h-5 md:h-7 lg:h-8 w-auto opacity-90"
       />
       <img
-        src={MicrosoftLogo}
+        src="/images/vendors/microsoft365.svg"
         alt="Microsoft"
         className="h-5 sm:h-5 md:h-7 lg:h-12 w-auto opacity-90"
       />
