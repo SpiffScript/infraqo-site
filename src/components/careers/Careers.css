@@ -1,0 +1,272 @@
+/* --------------------------------------------- */
+/* Careers page layout                           */
+/* --------------------------------------------- */
+
+.careers-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+  background-color: #020617; /* deep navy canvas */
+}
+
+/* Hero: dark band + light text */
+
+.careers-page .careers-hero {
+  margin-bottom: 2rem;
+  color: #e2e8f0; /* slate-200 */
+}
+
+.careers-page .careers-kicker-bar {
+  width: 44px;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #22d3ee);
+  margin-bottom: 0.5rem;
+}
+
+.careers-page .careers-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #64748b; /* slate-500 */
+  margin-bottom: 0.25rem;
+}
+
+.careers-page .careers-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #f9fafb; /* near white */
+  margin-bottom: 0.5rem;
+}
+
+.careers-page .careers-subtitle {
+  max-width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cbd5f5;
+}
+
+/* Stack cards vertically */
+
+.careers-page .careers-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+/* --------------------------------------------- */
+/* "What we care about" card                     */
+/* --------------------------------------------- */
+
+.careers-page .careers-panel {
+  padding: 1.8rem 1.8rem 2rem;
+  background-color: #f9fafb;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+  border-radius: 0;
+}
+
+.careers-page .careers-panel h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+}
+
+.careers-page .careers-panel p {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+/* blue inner tiles */
+
+.careers-page .careers-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.1rem;
+}
+
+.careers-page .careers-highlight-card {
+  padding: 0.9rem 0.95rem 1rem;
+  background-color: #dbeafe;     /* darker blue */
+  border: 1px solid #93c5fd;     /* blue-300 */
+  border-radius: 0;
+}
+
+.careers-page .careers-highlight-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.3rem;
+}
+
+.careers-page .careers-highlight-card p {
+  font-size: 0.85rem;
+  color: #1e3a8a;
+  margin: 0;
+}
+
+.careers-page .careers-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* --------------------------------------------- */
+/* "Tell us about you" card                      */
+/* --------------------------------------------- */
+
+.careers-page .careers-form-wrapper {
+  width: 100%;
+}
+
+.careers-page .careers-form-card {
+  position: relative;
+  padding: 1.8rem 1.8rem 2rem;
+  background-color: #f9fafb;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Optional Qo watermark */
+.careers-page .careers-form-with-watermark::before {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 260px;
+  height: 260px;
+  background-image: url("../assets/icons/icon-qo-light.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.careers-page .careers-form-card h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.careers-page .careers-form-intro {
+  margin-bottom: 1.1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* --------------------------------------------- */
+/* Form fields                                   */
+/* --------------------------------------------- */
+
+.careers-page .careers-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.careers-page .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.careers-page .form-row-two {
+  flex-direction: row;
+}
+
+.careers-page .form-row-two .form-field {
+  flex: 1;
+}
+
+.careers-page .form-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.careers-page .form-field input,
+.careers-page .form-field select,
+.careers-page .form-field textarea {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.careers-page .form-field input::placeholder,
+.careers-page .form-field textarea::placeholder {
+  color: #94a3b8;
+}
+
+.careers-page .form-field input:focus,
+.careers-page .form-field select:focus,
+.careers-page .form-field textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4);
+}
+
+/* Alerts */
+
+.careers-page .form-alert {
+  padding: 0.6rem 0.8rem;
+  border-radius: 0;
+  font-size: 0.85rem;
+  margin-bottom: 0.1rem;
+}
+
+.careers-page .form-alert-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.careers-page .form-alert-success {
+  background-color: #ecfdf3;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+/* Actions / disclaimer */
+
+.careers-page .form-actions {
+  margin-top: 0.4rem;
+  align-items: flex-start;
+}
+
+.careers-page .form-disclaimer {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 0.4rem;
+  max-width: 430px;
+}
+
+/* Responsive */
+
+@media (max-width: 960px) {
+  .careers-page {
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .careers-page .careers-highlights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -48,6 +48,12 @@ const Footer: React.FC = () => {
                 About
               </Link>
               <Link
+                to="/careers"
+                className="hover:text-blue-400 transition-colors"
+              >
+                Careers
+              </Link>
+              <Link
                 to="/blog"
                 className="hover:text-blue-400 transition-colors"
               >
@@ -117,6 +123,24 @@ const Footer: React.FC = () => {
           <p>
             Serving Denver, Colorado Springs, the Front Range, and Eastern
             Colorado.
+          </p>
+
+           {/* LEGAL LINKS */}
+          <p className="space-x-3">
+            <Link to="/privacy" className="hover:text-blue-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-slate-600">•</span>
+            <Link to="/terms" className="hover:text-blue-400 transition-colors">
+              Terms of Service
+            </Link>
+            <span className="text-slate-600">•</span>
+            <Link
+              to="/acceptable-use"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Acceptable Use Policy
+            </Link>
           </p>
           <p>
             &copy; {new Date().getFullYear()} InfraQo, LLC. All Rights Reserved.

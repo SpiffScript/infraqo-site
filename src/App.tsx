@@ -10,6 +10,11 @@ import WhyInfraQo from "./components/WhyInfraQo";
 import ContactForm from "./components/ContactForm";
 import CaseStudies from "./components/CaseStudies";
 import About from "./components/About";
+import Privacy from "./components/legal/Privacy";
+import Terms from "./components/legal/Terms";
+import AcceptableUse from "./components/legal/AcceptableUse";
+import CareersPage from "./components/careers/Careers";
+import CookieBanner from "./components/ui/CookieBanner";
 import NotFoundPage from "./NotFound";
 import ScrollToTopButton from "./components/ui/ScrollToTopButton";
 
@@ -64,6 +69,30 @@ const TitleManager: React.FC = () => {
         title = "About InfraQo | Our Mission & Experience";
         description =
           "InfraQo was founded by operators, not a help desk—bringing real-world hospitality and multi-site experience to structured cabling and network reliability.";
+        break;
+
+        case "/careers":
+        title = "Careers | Join the InfraQo Team";
+        description =
+          "Share your details with InfraQo’s operations-first cabling and network support team to be considered for future field, project, and operations roles.";
+        break;
+
+      case "/privacy":
+        title = "Privacy Policy | InfraQo";
+        description =
+          "Review how InfraQo collects, uses, and protects your information, including website data, contact details, and service-related information.";
+        break;
+
+      case "/terms":
+        title = "Terms of Service | InfraQo";
+        description =
+          "Read the Terms of Service that govern your use of InfraQo’s website and services, including legal responsibilities, limitations of liability, and important conditions of access.";
+        break;
+
+        case "/acceptable-use":
+        title = "Acceptable Use Policy | InfraQo";
+        description =
+          "Review the acceptable use guidelines for networks, systems, cabling, and services designed or supported by InfraQo, including security expectations, prohibited activities, and client responsibilities.";
         break;
 
       default:
@@ -197,10 +226,23 @@ const App: React.FC = () => {
         {/* About page */}
         <Route path="/about" element={<About />} />
 
+        {/* Privacy Policy page */}
+        <Route path="/privacy" element={<Privacy />} />
+
+        {/* Terms page */}
+        <Route path="/terms" element={<Terms />} />
+
+        {/* Acceptable Use page */}
+        <Route path="/acceptable-use" element={<AcceptableUse />} />
+
+        {/* Careers page */}
+        <Route path="/careers" element={<CareersPage />} />
+
         {/* 404 Not Found page */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
+      <CookieBanner />
       <Footer />
 
       {/* Scroll button */}

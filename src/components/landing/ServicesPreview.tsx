@@ -1,6 +1,7 @@
 import React from "react";
 import CtaButton from "../ui/CtaButton";
 import CardUnderline from "../ui/CardUnderline";
+import '/index.css';
 
 type ServicePreviewCard = {
   title: string;
