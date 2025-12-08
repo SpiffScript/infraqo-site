@@ -14,7 +14,6 @@ import Privacy from "./components/legal/Privacy";
 import Terms from "./components/legal/Terms";
 import AcceptableUse from "./components/legal/AcceptableUse";
 import CareersPage from "./components/careers/Careers";
-import CookieBanner from "./components/ui/CookieBanner";
 import NotFoundPage from "./NotFound";
 import ScrollToTopButton from "./components/ui/ScrollToTopButton";
 
@@ -242,7 +241,6 @@ const App: React.FC = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
-      <CookieBanner />
       <Footer />
 
       {/* Scroll button */}

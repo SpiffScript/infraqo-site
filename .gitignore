@@ -4,6 +4,9 @@ node_modules/
 # Production build output
 dist/
 
+# Local dev-only archive
+archive/
+
 # Vite cache
 .vite/
 

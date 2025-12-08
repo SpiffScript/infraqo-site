@@ -167,7 +167,7 @@ const Privacy: React.FC = () => {
             2.3 Cookies and Tracking Technologies (Cookie Policy)
           </h3>
           <p>
-            We use Cookies and similar tracking technologies (such as tags,
+            We may use Cookies and similar tracking technologies (such as tags,
             scripts, and pixels) to track activity on the Site and hold certain
             information. This section also serves as our Cookie Policy and
             explains how and why we use Cookies and similar technologies on the
