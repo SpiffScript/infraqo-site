@@ -9,6 +9,16 @@
   font-weight: 600;
 }
 
+/* Make images harder to drag / select globally */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 @keyframes logo-marquee {
   0% {
     transform: translateX(0);
@@ -33,4 +43,15 @@
 
 .logo-marquee:hover .logo-track {
   animation-play-state: paused;
+}
+
+/* Prevent drag or select, site-wide */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

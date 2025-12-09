@@ -158,7 +158,39 @@ const Terms: React.FC = () => {
             international copyright, trademark, and other intellectual property
             laws.
           </p>
-          <p>You may not, without our prior written consent:</p>
+
+          <p className="mt-4">
+            <strong>Third-Party Trademarks & Product References.</strong> All
+            third-party trademarks, logos, brand names, and product imagery
+            displayed on the Site—including but not limited to APC, Palo Alto
+            Networks, Acer, Netgear, Lenovo, TP-Link, Ubiquiti, and others—remain the
+            exclusive property of their respective owners.
+          </p>
+
+          <p>
+            Any appearance of these marks is for identification, informational, or 
+            descriptive purposes only to illustrate the types of equipment, technologies,
+            or solutions commonly used by InfraQo in the course of providing services.
+          </p>
+
+          <p>
+            <strong>
+              InfraQo is not affiliated with, endorsed by, sponsored by, or officially
+              connected with any third-party brand</strong> unless explicitly stated. Nothing on
+              the Site should be interpreted as a claim of partnership, certification,
+              authorized reseller status, or manufacturer endorsement.
+          </p>
+
+          <p>
+              References to third-party equipment do not indicate a warranty,
+              guarantee, or endorsement – by InfraQo or the product manufacturer.
+              Recommendations of equipment are based solely on InfraQo’s professional
+              judgment and experience and may vary depending on your project’s needs.
+          </p>
+
+          <p>
+            You may not, without our prior written consent:
+          </p>
           <ul className="list-disc list-inside space-y-1">
             <li>
               Copy, reproduce, distribute, publicly display, or create
@@ -177,6 +209,7 @@ const Terms: React.FC = () => {
               competing service.
             </li>
           </ul>
+
           <p>
             You are granted a limited, non-exclusive, non-transferable license
             to access and use the Site for your internal business purposes,

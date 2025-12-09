@@ -15,8 +15,9 @@ const TrustedByTeamsPreview: React.FC = () => {
                 <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[26rem] overflow-hidden bg-slate-950">
                   <img
                     src={SwitchImg}
-                    alt="Net"
-                    className="w-full h-full object-cover"
+                    alt="Network switch installation"
+                    className="w-full h-full object-cover select-none"
+                    draggable={false}
                   />
                 </div>
               </div>

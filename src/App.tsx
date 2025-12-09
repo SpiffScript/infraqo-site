@@ -4,7 +4,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
-import BlogPage from "./components/BlogPage";
 import Services from "./components/Services";
 import WhyInfraQo from "./components/WhyInfraQo";
 import ContactForm from "./components/ContactForm";
@@ -17,7 +16,14 @@ import CareersPage from "./components/careers/Careers";
 import NotFoundPage from "./NotFound";
 import ScrollToTopButton from "./components/ui/ScrollToTopButton";
 
-// --- Page title + meta description + JSON-LD manager ---
+import BlogPage from "./components/BlogPage";
+import TheDayEverythingWentDark from "./components/blog/TheDayEverythingWentDark";
+
+//
+// ────────────────────────────────────────────────────────────────────────────────
+// TITLE MANAGER – Updates <title>, <meta>, and JSON-LD when route changes
+// ────────────────────────────────────────────────────────────────────────────────
+//
 const TitleManager: React.FC = () => {
   const { pathname } = useLocation();
 
@@ -37,74 +43,65 @@ const TitleManager: React.FC = () => {
       case "/services":
         title = "Services | InfraQo – Structured Cabling & IT Support";
         description =
-          "Explore InfraQo’s services: structured cabling, networking and Wi-Fi, security cameras, managed IT support, and more. One partner for your entire technology stack.";
+          "Explore InfraQo’s services: structured cabling, networking and Wi-Fi, security cameras, managed IT support, and more.";
         break;
 
       case "/why-infraqo":
         title = "Why InfraQo | Engineered Network Reliability";
         description =
-          "Learn why operators choose InfraQo: reliability, clean installs, and an operations-first mindset built from years of running hotels, restaurants, and multi-site businesses and teams.";
+          "Learn why operators choose InfraQo: reliability, clean installs, and an operations-first mindset.";
         break;
 
       case "/case-studies":
         title = "Case Studies | InfraQo – Measurable Results";
-        description =
-          "See how InfraQo reduces downtime, stabilizes networks, and cleans up legacy cabling for real businesses across Colorado.";
+        description = "See measurable improvements from real InfraQo projects.";
         break;
 
       case "/contact":
         title = "Contact InfraQo | Start Your Project";
         description =
-          "Ready to stabilize your network, plan an install, or troubleshoot a problem? Share a few details and InfraQo will follow up within one business day.";
+          "Ready to stabilize your network, plan an install, or troubleshoot a problem?";
         break;
 
       case "/blog":
         title = "InfraQo Insights | Technical Guides & Network Tips";
         description =
-          "InfraQo’s upcoming articles will cover structured cabling, cameras, Wi-Fi design, and decision-making for operators who care about uptime.";
+          "Structured cabling insights, Wi-Fi design guides, and network reliability strategies.";
         break;
 
       case "/about":
         title = "About InfraQo | Our Mission & Experience";
         description =
-          "InfraQo was founded by operators, not a help desk—bringing real-world hospitality and multi-site experience to structured cabling and network reliability.";
+          "InfraQo was founded by operators, not a help desk — bringing real-world multi-site experience to IT infrastructure.";
         break;
 
-        case "/careers":
+      case "/careers":
         title = "Careers | Join the InfraQo Team";
         description =
-          "Share your details with InfraQo’s operations-first cabling and network support team to be considered for future field, project, and operations roles.";
+          "Share your details to be considered for future ops, field, or technical roles.";
         break;
 
       case "/privacy":
         title = "Privacy Policy | InfraQo";
-        description =
-          "Review how InfraQo collects, uses, and protects your information, including website data, contact details, and service-related information.";
         break;
 
       case "/terms":
         title = "Terms of Service | InfraQo";
-        description =
-          "Read the Terms of Service that govern your use of InfraQo’s website and services, including legal responsibilities, limitations of liability, and important conditions of access.";
         break;
 
-        case "/acceptable-use":
+      case "/acceptable-use":
         title = "Acceptable Use Policy | InfraQo";
-        description =
-          "Review the acceptable use guidelines for networks, systems, cabling, and services designed or supported by InfraQo, including security expectations, prohibited activities, and client responsibilities.";
         break;
 
       default:
         title = "404 | Page Not Found | InfraQo";
         description =
-          "The page you’re looking for doesn’t exist. The internet still works—this link just doesn’t.";
+          "The page you're trying to reach doesn't exist. The internet still works — just not this link.";
         break;
     }
 
-    // --- Document title ---
     document.title = title;
 
-    // --- Meta description ---
     let metaDesc = document.querySelector(
       'meta[name="description"]'
     ) as HTMLMetaElement | null;
@@ -117,58 +114,26 @@ const TitleManager: React.FC = () => {
 
     metaDesc.content = description;
 
-    // --- JSON-LD structured data for InfraQo (LocalBusiness) ---
-    const ldId = "infraqo-localbusiness-jsonld";
+    //
+    // JSON-LD structured data (LocalBusiness)
+    //
+    const ldId = "infraqo-jsonld";
     let existingLd = document.getElementById(ldId) as HTMLScriptElement | null;
 
     const jsonLdData = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://infraqo.com/#organization",
       name: "InfraQo",
-      url: "https://infraqo.com/",
-      description:
-        "InfraQo provides structured cabling, managed network services, IT support, and low-voltage infrastructure for businesses and homeowners across Colorado’s Front Range.",
+      url: "https://infraqo.com",
       telephone: "+1-720-515-4843",
       email: "support@infraqo.com",
-      areaServed: {
-        "@type": "AdministrativeArea",
-        name: "Colorado Front Range",
-      },
-      address: {
-        "@type": "PostalAddress",
-        addressRegion: "CO",
-        addressCountry: "US",
-      },
-      openingHours: "Mo-Fr 08:00-18:00",
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "08:00",
-          closes: "18:00",
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: "Saturday",
-          opens: "08:00",
-          closes: "12:00",
-          description: "By appointment only",
-        },
-      ],
-      image: "https://infraqo.com/og-image.png",
-      logo: "https://infraqo.com/og-image.png",
-      sameAs: [
-        "https://www.linkedin.com/company/infraqo",
-        "https://facebook.com/infraqo",
-        "https://x.com/InfraQo",
-      ],
+      areaServed: "Colorado Front Range"
     };
 
     if (!existingLd) {
       existingLd = document.createElement("script");
-      existingLd.type = "application/ld+json";
       existingLd.id = ldId;
+      existingLd.type = "application/ld+json";
       document.head.appendChild(existingLd);
     }
 
@@ -178,72 +143,78 @@ const TitleManager: React.FC = () => {
   return null;
 };
 
-// --- Global scroll reset on route change ---
+//
+// ────────────────────────────────────────────────────────────────────────────────
+// SCROLL RESET
+// ────────────────────────────────────────────────────────────────────────────────
+//
 const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
     if (!hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
-    // if there IS a hash, WhyInfraQo handles its own scrolling
   }, [pathname, hash]);
 
   return null;
 };
 
+//
+// ────────────────────────────────────────────────────────────────────────────────
+// REAL <App /> COMPONENT
+// ────────────────────────────────────────────────────────────────────────────────
+//
 const App: React.FC = () => {
+  
+  //
+  // Disable right-click ONLY on images (site-wide)
+  //
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && target.tagName.toLowerCase() === "img") {
+        e.preventDefault(); // Prevent Save Image As, etc.
+      }
+    };
+
+    document.addEventListener("contextmenu", handler);
+    return () => document.removeEventListener("contextmenu", handler);
+  }, []);
+
   return (
     <div className="bg-slate-950 min-h-screen">
-      {/* SEO title + description + JSON-LD */}
-      <TitleManager />
 
-      {/* runs on every route change */}
+      <TitleManager />
       <ScrollToTop />
 
       <Header />
 
       <Routes>
-        {/* Home / main landing page */}
         <Route path="/" element={<LandingPage />} />
-
-        {/* Services page */}
         <Route path="/services" element={<Services />} />
-
-        {/* Why InfraQo page */}
         <Route path="/why-infraqo" element={<WhyInfraQo />} />
-
-        {/* Case Studies page */}
         <Route path="/case-studies" element={<CaseStudies />} />
-
-        {/* Contact page */}
         <Route path="/contact" element={<ContactForm />} />
-
-        {/* Blog page */}
         <Route path="/blog" element={<BlogPage />} />
 
-        {/* About page */}
+        {/* Blog Posts */}
+        <Route
+          path="/blog/the-day-everything-went-dark"
+          element={<TheDayEverythingWentDark />}
+        />
+
         <Route path="/about" element={<About />} />
-
-        {/* Privacy Policy page */}
         <Route path="/privacy" element={<Privacy />} />
-
-        {/* Terms page */}
         <Route path="/terms" element={<Terms />} />
-
-        {/* Acceptable Use page */}
         <Route path="/acceptable-use" element={<AcceptableUse />} />
-
-        {/* Careers page */}
         <Route path="/careers" element={<CareersPage />} />
 
-        {/* 404 Not Found page */}
+        {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <Footer />
-
-      {/* Scroll button */}
       <ScrollToTopButton />
     </div>
   );

@@ -79,7 +79,8 @@ const AboutIntro: React.FC = () => {
               <img
                 src={JustinPhoto}
                 alt="InfraQo founder"
-                className="w-full h-full object-center opacity-80"
+                className="w-full h-full object-center opacity-80 select-none"
+                draggable={false}
               />
             </div>
           </FramedCard>

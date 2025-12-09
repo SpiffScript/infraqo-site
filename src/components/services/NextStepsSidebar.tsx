@@ -11,7 +11,7 @@ const steps = [
   },
   {
     label: "Clear Recommendations",
-    text: "You'll see straightforward options, costs, and trade-offs in plain language—no jargon, no surprise line items, and no pressure to overspend.",
+    text: "You'll see straightforward options, costs, and trade-offs in plain language. No jargon, no surprise line items, and no pressure to overspend.",
   },
   {
     label: "Project Scheduling",
@@ -27,7 +27,7 @@ const steps = [
   },
   {
     label: "Ongoing Support",
-    text: "We stay available after the install—handling updates, tuning, and support so your network remains stable, fast, and straightforward to manage.",
+    text: "We stay available after the install – handling updates, tuning, and support so your network remains stable, fast, and straightforward to manage.",
   },
 ];
 

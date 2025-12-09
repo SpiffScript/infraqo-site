@@ -61,7 +61,8 @@ const LogoMarquee: React.FC = () => {
                 <img
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto opacity-90"
+                  className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto opacity-90 select-none"
+                  draggable={false}
                 />
               </div>
             ))}

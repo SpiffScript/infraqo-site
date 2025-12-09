@@ -61,7 +61,8 @@ const WhyInfraQoSection: React.FC = () => {
             <img
               src={SecureLockImg}
               alt="Secure network and protected systems"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover select-none"
+              draggable={false}
             />
           </div>
         </FramedCard>

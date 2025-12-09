@@ -60,7 +60,7 @@ const ServiceContent: React.FC = () => {
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
 
         <p className="mt-3 text-slate-600 max-w-3xl">
-          Clean, well-organized cabling is the part of your network nobody sees—but everyone
+          Clean, well-organized cabling is the part of your network nobody sees – but everyone
           feels when it’s done wrong. We build structured cabling that is easy to service,
           simple to understand, and ready for whatever your business needs next.
         </p>
@@ -82,7 +82,7 @@ const ServiceContent: React.FC = () => {
 
         <p className="mt-3 text-slate-600 max-w-3xl">
           We design and tune networks that feel fast, stay stable, and scale with your
-          business—whether it's a small office or a busy, high-density environment.
+          business – whether it's a small office or a busy, high-density environment.
         </p>
 
         <BulletList>
@@ -206,7 +206,7 @@ const ServiceContent: React.FC = () => {
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
 
         <p className="mt-3 text-slate-600 max-w-3xl">
-          We align your technology with the way your team actually works—reducing friction,
+          We align your technology with the way your team actually works – reducing friction,
           avoiding rework, and making daily operations smoother.
         </p>
 

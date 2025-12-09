@@ -16,7 +16,7 @@ const SidebarCta: React.FC = () => {
 
       <div className="mt-7 flex flex-col gap-3">
         <CtaButton href="/contact" variant="glow" className="w-full">
-            Start Your Project
+            Free On-Site Assessment
         </CtaButton>
 
         <CtaButton href="tel:7205154843" variant="glow" className="w-full">
