@@ -69,6 +69,13 @@ const TitleManager: React.FC = () => {
           "Structured cabling insights, Wi-Fi design guides, and network reliability strategies.";
         break;
 
+      case "/blog/the-day-everything-went-dark":
+        title =
+          "The Day Everything Went Dark — and Why Infrastructure Became My Life’s Work | InfraQo";
+        description =
+          "How a nine-dollar switch took down two hotels and a restaurant, and why Justin Burch became obsessed with preventing infrastructure failures.";
+        break;
+
       case "/about":
         title = "About InfraQo | Our Mission & Experience";
         description =

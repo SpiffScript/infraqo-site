@@ -85,7 +85,7 @@ const TheDayEverythingWentDark: React.FC = () => {
               Origin Story
             </p>
             <h1 className="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-50">
-              The Day Everything Went Dark — and Why Infrastructure Became My
+              The Day Everything Went Dark – and Why Infrastructure Became My
               Life’s Work
             </h1>
             <p className="mt-2 text-xs text-slate-400">
@@ -205,7 +205,7 @@ const TheDayEverythingWentDark: React.FC = () => {
                   If you’ve ever been inside a busy restaurant when the music
                   suddenly stops, you know the feeling. A wide-open room full of
                   voices, clattering plates, silverware hitting porcelain,
-                  glasses tapping together — and nothing to smooth it out. It
+                  glasses tapping together – and nothing to smooth it out. It
                   hits your ears like someone dumping a sack of marbles across a
                   tile floor.
                 </p>
@@ -216,10 +216,10 @@ const TheDayEverythingWentDark: React.FC = () => {
                 <p>Then everything started breaking.</p>
                 <p>
                   It was a little after noon during a heavy lunch rush. I was
-                  meeting with a food purveyor at my desk, talking through a new
-                  beef label. Normal day, normal operations — two well-known
-                  hotels and a full-service restaurant all running at full
-                  steam.
+                  meeting with a food purveyor at my desk, talking through their new
+                  beef label I wasn’t actually interested in buying. Normal day, 
+                  normal operations – two well-known hotels and a full-service 
+                  restaurant all running at full steam.
                 </p>
                 <p>And then the POS system froze.</p>
                 <p>
@@ -234,12 +234,12 @@ const TheDayEverythingWentDark: React.FC = () => {
                   “Phones are down too.”
                 </p>
                 <p>
-                  A minute later: “The fire alarm panel isn’t communicating —
+                  A minute later: “The fire alarm panel isn’t communicating –
                   the monitoring company’s calling. They want to know if they
                   should dispatch the fire department.”
                 </p>
                 <p>
-                  That was the moment I knew — this wasn’t small. This wasn’t
+                  That was the moment I knew – this wasn’t small. This wasn’t
                   “restart the router” territory. This was something much
                   bigger, and it was unfolding fast.
                 </p>
@@ -263,7 +263,7 @@ const TheDayEverythingWentDark: React.FC = () => {
                   The most chaotic moment came on the restaurant side. I had
                   three separate tables standing at the host station, each
                   trying to pay. We couldn’t process a single card. They didn’t
-                  understand — “What do you mean you can’t take my payment?” —
+                  understand – “What do you mean you can’t take my payment?” –
                   and honestly, I didn’t blame them.
                 </p>
                 <p>
@@ -292,8 +292,8 @@ const TheDayEverythingWentDark: React.FC = () => {
                   away.
                 </p>
                 <p>
-                  At the same time, staff were looking at me for direction —
-                  rightfully so — and I didn’t have answers. My job as a leader
+                  At the same time, staff were looking at me for direction –
+                  rightfully so – and I didn’t have answers. My job as a leader
                   is to put people in a position to succeed. That day, nobody
                   could succeed. Not the staff. Not the guests. Not me.
                 </p>
@@ -331,13 +331,13 @@ const TheDayEverythingWentDark: React.FC = () => {
                   <li>no understanding of which device did which job</li>
                   <li>no vendor to call</li>
                   <li>
-                    and the original installer — Dakcom Solutions — had gone out
+                    and the original installer had gone out
                     of business, who knows how many years earlier
                   </li>
                 </ul>
                 <p>Whatever knowledge had once existed died with them.</p>
                 <p>
-                  The infrastructure closets were spread across the property —
+                  The infrastructure closets were spread across the property –
                   two hotels and a large restaurant, three different locations. I
                   was sprinting back and forth trying to figure out where the
                   problem started. The rooms themselves were a mess. Switches
@@ -350,7 +350,7 @@ const TheDayEverythingWentDark: React.FC = () => {
                   the hell am I even looking at? What’s supposed to be happening
                   here?”
                 </p>
-                <p>I felt helpless — and I hated that feeling.</p>
+                <p>I felt helpless – and I hated that feeling.</p>
                 <p>
                   I wasn’t blamed for the failure itself; I inherited the mess.
                   But I felt responsible for my people. My staff lost tips.
@@ -512,7 +512,7 @@ const TheDayEverythingWentDark: React.FC = () => {
                 <p>Rebuilt the camera system.</p>
                 <p>Corrected years of bad installs and indifferent attitudes.</p>
                 <p>
-                  Piece by piece, I rebuilt a system that made sense — something
+                  Piece by piece, I rebuilt a system that made sense – something
                   stable, consistent, and reliable enough to handle the demands
                   of real business, day after day.
                 </p>
