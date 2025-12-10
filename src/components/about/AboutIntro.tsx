@@ -8,7 +8,6 @@ const AboutIntro: React.FC = () => {
   return (
     <section className="relative py-16 lg:py-20 bg-slate-100 overflow-hidden">
       
-      {/* WATERMARK */}
       <img
       src={InfraQoMark}
       alt=""
@@ -28,7 +27,6 @@ const AboutIntro: React.FC = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-center relative z-10">
         
-        {/* Text */}
         <div>
           <p className="text-xs font-semibold tracking-[0.3em] text-blue-600 uppercase">
             About InfraQo
@@ -72,7 +70,6 @@ const AboutIntro: React.FC = () => {
           </div>
         </div>
 
-        {/* Image / visual */}
         <div className="max-w-md md:justify-self-end w-full relative z-10">
           <FramedCard className="p-4">
             <div className="border border-slate-200 bg-white p-0 overflow-hidden h-96 sm:h-[26rem] rounded-md">

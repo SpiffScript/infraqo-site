@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import QoMark from "../../assets/icons/icon-qo-light.svg";
 import JustinPhoto from "../../assets/about/infraqo-founder.png";
 import CulpritImage from "../../assets/images/blog/theculprit.jpg";
-import CtaButton from "../ui/CtaButton";
+import CtaButtonRow from "../ui/CtaButtonRow";
 
-// Fade-in wrapper for sections
 const FadeInSection: React.FC<{ children: React.ReactNode; delay?: number }> = ({
   children,
   delay = 0,
@@ -45,7 +44,6 @@ const FadeInSection: React.FC<{ children: React.ReactNode; delay?: number }> = (
   );
 };
 
-// Fullscreen image modal for zoomed view
 const ImageModal: React.FC<{
   src: string;
   alt: string;
@@ -68,7 +66,6 @@ const TheDayEverythingWentDark: React.FC = () => {
 
   return (
     <main className="relative bg-slate-950 text-slate-50">
-      {/* Qo watermark */}
       <div className="pointer-events-none absolute inset-0 flex items-start justify-center opacity-15">
         <img
           src={QoMark}
@@ -93,7 +90,6 @@ const TheDayEverythingWentDark: React.FC = () => {
             </p>
 
             <div className="mt-4 grid gap-8 md:grid-cols-[minmax(0,2.2fr)_minmax(0,1.2fr)]">
-              {/* Left: summary + author */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mt-6">
                   <img
@@ -119,7 +115,6 @@ const TheDayEverythingWentDark: React.FC = () => {
                 </p>
               </div>
 
-              {/* Right: jump links + share */}
               <div className="space-y-5 text-xs text-slate-400">
                 <div>
                   <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-slate-500">
@@ -195,9 +190,7 @@ const TheDayEverythingWentDark: React.FC = () => {
             </div>
           </header>
 
-          {/* Main article body */}
           <div className="space-y-12 text-slate-100 leading-relaxed">
-            {/* Intro block */}
             <FadeInSection>
               <div className="space-y-4">
                 <p>I still remember the sound before anything else.</p>
@@ -246,7 +239,6 @@ const TheDayEverythingWentDark: React.FC = () => {
               </div>
             </FadeInSection>
 
-            {/* Fifteen Minutes Later, I Hit the Wall */}
             <FadeInSection>
               <section className="space-y-4">
                 <div className="inline-block">
@@ -306,7 +298,6 @@ const TheDayEverythingWentDark: React.FC = () => {
               </section>
             </FadeInSection>
 
-            {/* The Closets Were a Disaster */}
             <FadeInSection>
               <section className="space-y-4">
                 <div className="inline-block">
@@ -364,7 +355,6 @@ const TheDayEverythingWentDark: React.FC = () => {
               </section>
             </FadeInSection>
 
-            {/* The Culprit: A $9.99 Switch */}
             <FadeInSection>
               <section className="space-y-4">
                 <div className="inline-block">
@@ -378,7 +368,6 @@ const TheDayEverythingWentDark: React.FC = () => {
                   <div className="mt-2 h-[2px] w-16 bg-blue-500/80" />
                 </div>
 
-                {/* Framed, clickable image floated on the right */}
                 <div
                   className="
                     float-none md:float-right
@@ -432,7 +421,6 @@ const TheDayEverythingWentDark: React.FC = () => {
               </section>
             </FadeInSection>
 
-            {/* I Stayed Until 1am */}
             <FadeInSection>
               <section className="space-y-4 clear-both">
                 <div className="inline-block">
@@ -468,7 +456,6 @@ const TheDayEverythingWentDark: React.FC = () => {
               </section>
             </FadeInSection>
 
-            {/* That Night, Something in Me Changed */}
             <FadeInSection>
               <section className="space-y-4">
                 <div className="inline-block">
@@ -521,7 +508,6 @@ const TheDayEverythingWentDark: React.FC = () => {
               </section>
             </FadeInSection>
 
-            {/* Most Small Businesses Don't Realize... */}
             <FadeInSection>
               <section className="space-y-4">
                 <div className="inline-block">
@@ -580,39 +566,29 @@ const TheDayEverythingWentDark: React.FC = () => {
             </FadeInSection>
           </div>
 
-          {/* CTA at the bottom of the post */}
-          <div className="mt-12 border-t border-slate-800 pt-8">
-            <p className="text-sm text-center text-slate-300 mb-4">
-              Want help avoiding a failure like this in your own environment?
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <CtaButton
-                href="tel:+17205154843"
-                variant="glow"
-                className="min-w-[11rem]"
-              >
-                Call or Text
-              </CtaButton>
-              <CtaButton
-                href="mailto:support@infraqo.com"
-                variant="glow"
-                className="min-w-[11rem]"
-              >
-                Email
-              </CtaButton>
-              <CtaButton
-                to="/contact"
-                variant="dark"
-                className="min-w-[11rem]"
-              >
-                On-Site Review
-              </CtaButton>
-            </div>
-          </div>
+          <CtaButtonRow
+            headline="Want help avoiding a failure like this in your own environment?"
+            actions={[
+                {
+                label: "Call or Text",
+                href: "tel:+17205154843",
+                variant: "glow",
+                },
+                {
+                label: "Email",
+                href: "mailto:support@infraqo.com",
+                variant: "glow",
+                },
+                {
+                label: "On-Site Review",
+                to: "/contact",
+                variant: "dark",
+                },
+            ]}
+            />
         </article>
       </div>
 
-      {/* Zoomed image modal */}
       {showImageModal && (
         <ImageModal
           src={CulpritImage}

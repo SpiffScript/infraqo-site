@@ -32,7 +32,6 @@ const AboutWhyWeExist: React.FC = () => {
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {/* Card 1 */}
           <FramedCard className="p-6 bg-white border border-slate-300">
             <h3 className="text-xl font-bold text-slate-900">
               Clean, predictable installs
@@ -45,7 +44,6 @@ const AboutWhyWeExist: React.FC = () => {
             </p>
           </FramedCard>
 
-          {/* Card 2 */}
           <FramedCard className="p-6 bg-white border border-slate-300">
             <h3 className="text-xl font-bold text-slate-900">
               Documentation that actually exists
@@ -58,7 +56,6 @@ const AboutWhyWeExist: React.FC = () => {
             </p>
           </FramedCard>
 
-          {/* Card 3 */}
           <FramedCard className="p-6 bg-white border border-slate-300">
             <h3 className="text-xl font-bold text-slate-900">
               Support beyond “go live”

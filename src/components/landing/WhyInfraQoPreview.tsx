@@ -8,7 +8,6 @@ const WhyInfraQoSection: React.FC = () => {
   return (
     <section className="py-16 bg-slate-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* LEFT CONTENT */}
         <div className="flex flex-col gap-6">
           <div>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
@@ -35,7 +34,6 @@ const WhyInfraQoSection: React.FC = () => {
             </ul>
           </div>
 
-          {/* DARK PANEL */}
           <div className="group relative overflow-hidden bg-slate-950 text-slate-50 border border-slate-900 p-6 flex flex-col shadow-sm">
             <p className="inline-block text-2xl font-bold text-blue-400 transform origin-left transition-all duration-200 group-hover:scale-[1.03] group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.65)]">
               Real-world Impact
@@ -55,7 +53,6 @@ const WhyInfraQoSection: React.FC = () => {
           </div>
         </div>
 
-        {/* IMAGE CARD WITH BLUE UNDERLINE */}
         <FramedCard className="p-4">
           <div className="border border-slate-200 p-2 bg-white flex-1">
             <img

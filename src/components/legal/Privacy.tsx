@@ -10,7 +10,7 @@ const Privacy: React.FC = () => {
       if (el) {
         const rect = el.getBoundingClientRect();
         const currentScroll = window.scrollY || window.pageYOffset;
-        const headerOffset = 96; // adjust if header gets taller/shorter
+        const headerOffset = 96;
         const targetY = rect.top + currentScroll - headerOffset;
 
         window.scrollTo({
@@ -52,7 +52,6 @@ const Privacy: React.FC = () => {
             same meanings as in our Terms of Service.
           </p>
 
-          {/* 1. Definitions */}
           <h2 className="text-xl font-semibold mt-10">1. Definitions</h2>
           <p>
             <span className="font-semibold">“Personal Data”</span> means any
@@ -113,7 +112,6 @@ const Privacy: React.FC = () => {
             Data.
           </p>
 
-          {/* 2. Information We Collect */}
           <h2 className="text-xl font-semibold mt-10">
             2. Information We Collect
           </h2>
@@ -224,7 +222,6 @@ const Privacy: React.FC = () => {
             example, analytics or CRM platforms).
           </p>
 
-          {/* 3. Use of Data */}
           <h2 className="text-xl font-semibold mt-10">3. Use of Data</h2>
           <p>InfraQo uses the collected data for various purposes, including:</p>
           <ul className="list-disc list-inside space-y-1">
@@ -266,7 +263,6 @@ const Privacy: React.FC = () => {
             Personal Data.
           </p>
 
-          {/* 4. Legal Bases */}
           <h2 className="text-xl font-semibold mt-10">
             4. Legal Bases for Processing
           </h2>
@@ -289,7 +285,6 @@ const Privacy: React.FC = () => {
             <li>Your consent, where required by law</li>
           </ul>
 
-          {/* 5. Retention */}
           <h2 className="text-xl font-semibold mt-10">5. Retention of Data</h2>
           <p>
             InfraQo will retain Personal Data and Business Data only for as long
@@ -299,7 +294,6 @@ const Privacy: React.FC = () => {
             and policies.
           </p>
 
-          {/* 6. Transfer */}
           <h2 className="text-xl font-semibold mt-10">6. Transfer of Data</h2>
           <p>
             Your information, including Personal Data, may be transferred to and
@@ -308,7 +302,6 @@ const Privacy: React.FC = () => {
             transfers, subject to applicable law.
           </p>
 
-          {/* 7. Disclosure */}
           <h2 className="text-xl font-semibold mt-10">7. Disclosure of Data</h2>
           <h3 className="text-base font-semibold mt-4">
             7.1 Service Providers and Business Partners
@@ -341,7 +334,6 @@ const Privacy: React.FC = () => {
             information may be transferred as part of that transaction.
           </p>
 
-          {/* 8. Security */}
           <h2 className="text-xl font-semibold mt-10">8. Security of Data</h2>
           <p>
             We implement commercially reasonable safeguards designed to protect
@@ -350,7 +342,6 @@ const Privacy: React.FC = () => {
             data, we cannot guarantee its absolute security.
           </p>
 
-          {/* 9. Your Rights */}
           <h2 className="text-xl font-semibold mt-10">9. Your Rights</h2>
           <p>
             Depending on your jurisdiction, you may have rights regarding your
@@ -371,7 +362,6 @@ const Privacy: React.FC = () => {
             . We may need to verify your identity before responding.
           </p>
 
-          {/* 10. Children */}
           <h2 className="text-xl font-semibold mt-10">
             10. Children’s Privacy
           </h2>
@@ -383,7 +373,6 @@ const Privacy: React.FC = () => {
             delete it.
           </p>
 
-          {/* 11. Third-Party Sites */}
           <h2 className="text-xl font-semibold mt-10">
             11. Third-Party Sites and Services
           </h2>
@@ -395,7 +384,6 @@ const Privacy: React.FC = () => {
             visit.
           </p>
 
-          {/* 12. Changes */}
           <h2 className="text-xl font-semibold mt-10">
             12. Changes to This Privacy Policy
           </h2>
@@ -405,7 +393,6 @@ const Privacy: React.FC = () => {
             the top. When required by law, we will provide additional notice.
           </p>
 
-          {/* 13. Contact */}
           <h2 className="text-xl font-semibold mt-10">13. Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy or our handling

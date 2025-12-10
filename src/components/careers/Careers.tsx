@@ -175,7 +175,6 @@ const CareersPage: React.FC = () => {
       </section>
 
       <section className="careers-layout">
-        {/* LEFT: what we care about */}
         <div className="careers-panel">
           <h2>What we care about</h2>
           <p>
@@ -214,7 +213,6 @@ const CareersPage: React.FC = () => {
           </p>
         </div>
 
-        {/* RIGHT: form */}
         <div className="careers-form-wrapper">
           <div className="careers-form-card careers-form-with-watermark">
             <h2>Tell us about you</h2>

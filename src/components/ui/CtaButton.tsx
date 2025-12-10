@@ -18,15 +18,12 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   fullWidth = false,
   className = "",
 }) => {
-  // Shared base styles for ALL CTA buttons
   const baseClasses =
     "inline-flex items-center justify-center px-5 py-3 text-sm font-bold uppercase tracking-widest border-2 bg-transparent transition-all duration-200";
 
-  // Variant-specific colors + shadows
   let colorClasses: string;
 
   if (variant === "dark") {
-    // Dark buttons (on navy background) – blue glow, transparent bg
     colorClasses = [
       "text-blue-400 border-blue-400",
       "shadow-[0_0_10px_rgba(59,130,246,0.30)]",
@@ -35,7 +32,6 @@ const CtaButton: React.FC<CtaButtonProps> = ({
       "transition-shadow",
     ].join(" ");
   } else if (variant === "glow") {
-  // InfraQo blue glow (matches landing page CTA)
   colorClasses = [
     "bg-blue-700 text-white border-blue-700",
     "shadow-[0_0_12px_rgba(37,99,235,0.45)]",
@@ -44,7 +40,6 @@ const CtaButton: React.FC<CtaButtonProps> = ({
     "transition-shadow",
   ].join(" ");
 } else {
-    // Light buttons (on light background) – subtle outer shadow
     colorClasses = [
       "text-blue-700 border-blue-500",
       "shadow-[0_2px_6px_rgba(0,0,0,0.08)]",

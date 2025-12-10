@@ -44,12 +44,9 @@ const BuiltOnResultsPreview: React.FC = () => {
               so you see system improvements, not just new hardware.
             </p>
           </div>
-
-          {/* CTA */}
           <CtaButton to="/case-studies">View case studies</CtaButton>
         </div>
 
-        {/* RESULTS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {results.map((card) => (
             <div

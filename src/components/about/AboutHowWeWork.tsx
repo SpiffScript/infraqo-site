@@ -6,7 +6,6 @@ const AboutHowWeWork: React.FC = () => {
   return (
     <section className="py-16 bg-slate-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        {/* Left: process */}
         <div>
           <p className="text-xs font-semibold tracking-[0.3em] text-blue-600 uppercase">
             How we work
@@ -37,7 +36,6 @@ const AboutHowWeWork: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: fit card */}
         <div className="lg:pl-4">
           <div className="bg-white border border-slate-300 p-6 shadow-sm">
             <h3 className="text-xl font-bold text-slate-900">

@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import QoMark from "../assets/icons/icon-qo-light.svg";
-import CtaButton from "../components/ui/CtaButton";
+import CtaButtonRow from "./ui/CtaButtonRow";
 
 const BlogPage: React.FC = () => {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen pb-28">
       <section className="pt-28 pb-24 relative overflow-hidden">
-        {/* Watermark */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-5">
           <img
             src={QoMark}
@@ -18,7 +17,6 @@ const BlogPage: React.FC = () => {
 
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            {/* Page header */}
             <header className="mb-10">
               <p className="text-xs font-semibold tracking-wide text-blue-400 uppercase">
                 InfraQo Blog
@@ -32,9 +30,7 @@ const BlogPage: React.FC = () => {
               </p>
             </header>
 
-            {/* Posts list */}
             <div className="space-y-6">
-              {/* Post 1 card */}
               <article className="border border-slate-700/70 bg-slate-900/60 backdrop-blur-sm rounded-xl p-5 md:p-6 shadow-sm hover:border-blue-500/70 transition-colors duration-200">
                 <p className="text-xs uppercase tracking-wide text-blue-400">
                   Origin Story
@@ -72,44 +68,28 @@ const BlogPage: React.FC = () => {
                   </Link>
                 </div>
               </article>
-
-              {/* Future posts go here */}
-              {/* <article>...next post...</article> */}
             </div>
 
-            {/* CTA ROW */}
-            <div className="mt-10 max-w-5xl mx-auto text-center">
-              <p className="text-base md:text-lg font-semibold text-slate-100">
-                Need answers before the rest of the articles are live?
-              </p>
-
-              <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
-
-                <CtaButton
-                  href="tel:+17205154843"
-                  variant="glow"
-                  className="min-w-[11rem]"
-                >
-                  Call or Text
-                </CtaButton>
-
-                <CtaButton
-                  href="mailto:support@infraqo.com"
-                  variant="dark"
-                  className="min-w-[11rem]"
-                >
-                  Email
-                </CtaButton>
-
-                <CtaButton
-                  to="/contact"
-                  variant="dark"
-                  className="min-w-[11rem]"
-                >
-                  Just Browsing
-                </CtaButton>
-              </div>
-            </div>
+            <CtaButtonRow
+              headline="Need answers before the rest of the articles are live?"
+              actions={[
+                {
+                  label: "Call or Text",
+                  href: "tel:+17205154843",
+                  variant: "glow",
+                },
+                {
+                  label: "Email",
+                  href: "mailto:support@infraqo.com",
+                  variant: "glow",
+                },
+                {
+                  label: "Just Browsing",
+                  to: "/contact",
+                  variant: "dark",
+                },
+              ]}
+            />
           </div>
         </div>
       </section>

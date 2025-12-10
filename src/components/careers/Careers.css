@@ -1,19 +1,13 @@
-/* --------------------------------------------- */
-/* Careers page layout                           */
-/* --------------------------------------------- */
-
 .careers-page {
   max-width: 1120px;
   margin: 0 auto;
   padding: 4rem 1.5rem 5rem;
-  background-color: #020617; /* deep navy canvas */
+  background-color: #020617;
 }
-
-/* Hero: dark band + light text */
 
 .careers-page .careers-hero {
   margin-bottom: 2rem;
-  color: #e2e8f0; /* slate-200 */
+  color: #e2e8f0;
 }
 
 .careers-page .careers-kicker-bar {
@@ -27,14 +21,14 @@
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #64748b; /* slate-500 */
+  color: #64748b;
   margin-bottom: 0.25rem;
 }
 
 .careers-page .careers-title {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #f9fafb; /* near white */
+  color: #f9fafb;
   margin-bottom: 0.5rem;
 }
 
@@ -45,7 +39,6 @@
   color: #cbd5f5;
 }
 
-/* Stack cards vertically */
 
 .careers-page .careers-layout {
   display: flex;
@@ -53,10 +46,6 @@
   gap: 2.5rem;
   align-items: stretch;
 }
-
-/* --------------------------------------------- */
-/* "What we care about" card                     */
-/* --------------------------------------------- */
 
 .careers-page .careers-panel {
   padding: 1.8rem 1.8rem 2rem;
@@ -80,8 +69,6 @@
   color: #475569;
 }
 
-/* blue inner tiles */
-
 .careers-page .careers-highlights {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -91,8 +78,8 @@
 
 .careers-page .careers-highlight-card {
   padding: 0.9rem 0.95rem 1rem;
-  background-color: #dbeafe;     /* darker blue */
-  border: 1px solid #93c5fd;     /* blue-300 */
+  background-color: #dbeafe;
+  border: 1px solid #93c5fd;
   border-radius: 0;
 }
 
@@ -115,10 +102,6 @@
   color: #64748b;
 }
 
-/* --------------------------------------------- */
-/* "Tell us about you" card                      */
-/* --------------------------------------------- */
-
 .careers-page .careers-form-wrapper {
   width: 100%;
 }
@@ -133,7 +116,6 @@
   overflow: hidden;
 }
 
-/* Optional Qo watermark */
 .careers-page .careers-form-with-watermark::before {
   content: "";
   position: absolute;
@@ -160,10 +142,6 @@
   font-size: 0.9rem;
   color: #64748b;
 }
-
-/* --------------------------------------------- */
-/* Form fields                                   */
-/* --------------------------------------------- */
 
 .careers-page .careers-form {
   display: flex;
@@ -224,8 +202,6 @@
   box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4);
 }
 
-/* Alerts */
-
 .careers-page .form-alert {
   padding: 0.6rem 0.8rem;
   border-radius: 0;
@@ -245,8 +221,6 @@
   color: #166534;
 }
 
-/* Actions / disclaimer */
-
 .careers-page .form-actions {
   margin-top: 0.4rem;
   align-items: flex-start;
@@ -258,8 +232,6 @@
   margin-top: 0.4rem;
   max-width: 430px;
 }
-
-/* Responsive */
 
 @media (max-width: 960px) {
   .careers-page {

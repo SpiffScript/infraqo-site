@@ -1,7 +1,6 @@
 import React from "react";
 
 const ServiceAreaMapEmbed: React.FC = () => {
-  // Replace this with your actual Google Maps embed URL
   const mapSrc =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1584944.8888714286!2d-102.03092498020186!3d39.115678758142934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876b80aa231f17cf%3A0x118ef4f8278a36d6!2sDenver%2C%20CO!5e0!3m2!1sen!2sus!4v1764881918539!5m2!1sen!2sus";
 
@@ -11,7 +10,6 @@ const ServiceAreaMapEmbed: React.FC = () => {
       className="w-full bg-slate-950/90 border-t border-slate-800 py-16 px-4 sm:px-6 lg:px-12"
     >
       <div className="mx-auto max-w-6xl">
-        {/* Header */}
         <div className="max-w-3xl mb-8">
           <p className="text-xs font-semibold tracking-wide text-sky-400 uppercase">
             Service Area
@@ -26,7 +24,6 @@ const ServiceAreaMapEmbed: React.FC = () => {
           </p>
         </div>
 
-        {/* Map card */}
         <div className="relative rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 shadow-xl shadow-sky-900/30 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-sky-500/20 blur-3xl opacity-70 pointer-events-none" />
 

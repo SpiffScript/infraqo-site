@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex + 1) % headlines.length);
         setFade(true);
-      }, 500); // match transition duration
+      }, 500);
     }, 4000);
     return () => clearInterval(timer);
   }, []);

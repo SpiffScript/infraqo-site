@@ -13,7 +13,6 @@ const AcceptableUse: React.FC = () => {
         </p>
 
         <div className="space-y-6 text-sm leading-relaxed text-slate-800">
-          {/* Intro / relationship to other policies */}
           <p>
             This Acceptable Use Policy (&quot;AUP&quot;) describes guidelines
             and restrictions for the use of networks, systems, cabling,
@@ -52,7 +51,6 @@ const AcceptableUse: React.FC = () => {
 
           </p>
 
-          {/* 1. Authorized Use */}
           <h2 className="text-xl font-semibold mt-8">
             1. Authorized Use and Responsibility
           </h2>
@@ -70,7 +68,6 @@ const AcceptableUse: React.FC = () => {
             or customers who access your networks (such as guest Wi-Fi).
           </p>
 
-          {/* 2. Prohibited Activities */}
           <h2 className="text-xl font-semibold mt-8">
             2. Prohibited Activities
           </h2>
@@ -116,7 +113,6 @@ const AcceptableUse: React.FC = () => {
             </li>
           </ul>
 
-          {/* 3. Equipment, Cabling, and Configuration Changes */}
           <h2 className="text-xl font-semibold mt-8">
             3. Equipment, Cabling, and Configuration Changes
           </h2>
@@ -158,7 +154,6 @@ const AcceptableUse: React.FC = () => {
             our prevailing rates.
           </p>
 
-          {/* 4. Security, Access, and Credentials */}
           <h2 className="text-xl font-semibold mt-8">
             4. Security, Access, and Credentials
           </h2>
@@ -193,7 +188,6 @@ const AcceptableUse: React.FC = () => {
             appropriate, limit or disclaim responsibility for related risk.
           </p>
 
-          {/* 5. Guest and Public Networks */}
           <h2 className="text-xl font-semibold mt-8">
             5. Guest Wi-Fi and Public-Facing Networks
           </h2>
@@ -225,7 +219,6 @@ const AcceptableUse: React.FC = () => {
             permitted under our agreements with you.
           </p>
 
-          {/* 6. Monitoring, Logging, and Privacy */}
           <h2 className="text-xl font-semibold mt-8">
             6. Monitoring, Logging, and Privacy
           </h2>
@@ -250,7 +243,6 @@ const AcceptableUse: React.FC = () => {
             and customers.
           </p>
 
-          {/* 7. Misuse, Enforcement, and Suspension */}
           <h2 className="text-xl font-semibold mt-8">
             7. Misuse, Enforcement, and Suspension of Services
           </h2>
@@ -293,7 +285,6 @@ const AcceptableUse: React.FC = () => {
             integrity of your environment—not to punish honest mistakes.
           </p>
 
-          {/* 8. Reporting Concerns */}
           <h2 className="text-xl font-semibold mt-8">
             8. Reporting Concerns or Potential Violations
           </h2>
@@ -315,7 +306,6 @@ const AcceptableUse: React.FC = () => {
             <span className="whitespace-nowrap">720-515-4843</span>.
           </p>
 
-          {/* 9. Changes */}
           <h2 className="text-xl font-semibold mt-8">
             9. Changes to This Acceptable Use Policy
           </h2>

@@ -37,7 +37,6 @@ const Terms: React.FC = () => {
             covered by that agreement.
           </p>
 
-          {/* 1. Eligibility */}
           <h2 className="text-xl font-semibold mt-10">1. Eligibility</h2>
           <p>
             The Site is intended for business, commercial, and professional use.
@@ -59,7 +58,6 @@ const Terms: React.FC = () => {
             at our sole discretion, where permitted by law.
           </p>
 
-          {/* 2. Use of the Site */}
           <h2 className="text-xl font-semibold mt-10">2. Use of the Site</h2>
           <p>You agree to use the Site only for lawful purposes. You must not:</p>
           <ul className="list-disc list-inside space-y-1">
@@ -99,7 +97,6 @@ const Terms: React.FC = () => {
             have violated these Terms.
           </p>
 
-          {/* 3. No Professional Advice */}
           <h2 className="text-xl font-semibold mt-10">
             3. No Professional Advice or Guarantees
           </h2>
@@ -122,7 +119,6 @@ const Terms: React.FC = () => {
             not by the content on the Site.
           </p>
 
-          {/* 4. Quotes & Service Descriptions */}
           <h2 className="text-xl font-semibold mt-10">
             4. Quotes, Estimates, and Service Descriptions
           </h2>
@@ -146,7 +142,6 @@ const Terms: React.FC = () => {
             proposals at any time prior to acceptance.
           </p>
 
-          {/* 5. Intellectual Property */}
           <h2 className="text-xl font-semibold mt-10">
             5. Intellectual Property
           </h2>
@@ -162,8 +157,8 @@ const Terms: React.FC = () => {
           <p className="mt-4">
             <strong>Third-Party Trademarks & Product References.</strong> All
             third-party trademarks, logos, brand names, and product imagery
-            displayed on the Site—including but not limited to APC, Palo Alto
-            Networks, Acer, Netgear, Lenovo, TP-Link, Ubiquiti, and others—remain the
+            displayed on the Site – including but not limited to APC, Palo Alto
+            Networks, Acer, Netgear, Lenovo, TP-Link, Ubiquiti, and others – remain the
             exclusive property of their respective owners.
           </p>
 
@@ -216,7 +211,6 @@ const Terms: React.FC = () => {
             subject to these Terms.
           </p>
 
-          {/* 6. User Submissions */}
           <h2 className="text-xl font-semibold mt-10">
             6. User Submissions and Communications
           </h2>
@@ -243,7 +237,6 @@ const Terms: React.FC = () => {
             party&apos;s rights.
           </p>
 
-          {/* 7. Third-Party Links */}
           <h2 className="text-xl font-semibold mt-10">
             7. Third-Party Tools, Links, and Integrations
           </h2>
@@ -261,7 +254,6 @@ const Terms: React.FC = () => {
             of that third party.
           </p>
 
-          {/* 8. Disclaimers */}
           <h2 className="text-xl font-semibold mt-10">8. Disclaimers</h2>
           <p>
             TO THE FULLEST EXTENT PERMITTED BY LAW, THE SITE AND ALL CONTENT
@@ -288,7 +280,6 @@ const Terms: React.FC = () => {
             PROVIDED THROUGH THE SITE.
           </p>
 
-          {/* 9. Limitation of Liability */}
           <h2 className="text-xl font-semibold mt-10">
             9. Limitation of Liability
           </h2>
@@ -315,7 +306,6 @@ const Terms: React.FC = () => {
             TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW.
           </p>
 
-          {/* 10. Indemnification */}
           <h2 className="text-xl font-semibold mt-10">10. Indemnification</h2>
           <p>
             You agree to indemnify, defend, and hold harmless InfraQo and its
@@ -341,7 +331,6 @@ const Terms: React.FC = () => {
             Terms and your use of the Site.
           </p>
 
-          {/* 11. Managed Services / Remote Access */}
           <h2 className="text-xl font-semibold mt-10">
             11. Managed Services, Remote Access, and On-Site Work
           </h2>
@@ -369,7 +358,6 @@ const Terms: React.FC = () => {
             </li>
           </ul>
 
-          {/* 12. Termination */}
           <h2 className="text-xl font-semibold mt-10">12. Termination</h2>
           <p>
             InfraQo may, in its sole discretion and without notice, suspend or
@@ -383,7 +371,6 @@ const Terms: React.FC = () => {
             liability, and indemnification obligations) shall survive.
           </p>
 
-          {/* 13. Governing Law */}
           <h2 className="text-xl font-semibold mt-10">13. Governing Law</h2>
           <p>
             These Terms and any dispute arising out of or relating to them or
@@ -398,7 +385,6 @@ const Terms: React.FC = () => {
             hereby consent to the personal jurisdiction and venue of such courts.
           </p>
 
-          {/* 14. Changes */}
           <h2 className="text-xl font-semibold mt-10">
             14. Changes to These Terms
           </h2>
@@ -413,7 +399,6 @@ const Terms: React.FC = () => {
             Terms means that you accept and agree to the changes.
           </p>
 
-          {/* 15. Contact */}
           <h2 className="text-xl font-semibold mt-10">15. Contact Us</h2>
           <p>
             If you have any questions about these Terms, please contact us:
