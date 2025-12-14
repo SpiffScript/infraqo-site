@@ -5,7 +5,6 @@ const WhyInfraQoGrid: React.FC = () => {
     <section className="mb-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
         
-        {/* Card 1 */}
         <div className="group relative bg-slate-50 p-6 h-full overflow-hidden border border-slate-200 transition-all hover:border-blue-500 hover:shadow-lg">
           <h3 className="text-2xl font-bold text-slate-900">A Better Standard of Work</h3>
           <p className="mt-4 text-slate-600">
@@ -22,7 +21,6 @@ const WhyInfraQoGrid: React.FC = () => {
           <div className="absolute bottom-0 left-0 h-1 bg-blue-500 w-0 group-hover:w-full transition-all duration-500" />
         </div>
 
-        {/* Card 2 */}
         <div className="group relative bg-slate-50 p-6 h-full overflow-hidden border border-slate-200 transition-all hover:border-blue-500 hover:shadow-lg">
           <h3 className="text-2xl font-bold text-slate-900">One Partner – Complete Solutions</h3>
           <p className="mt-4 text-slate-600">
@@ -39,7 +37,6 @@ const WhyInfraQoGrid: React.FC = () => {
           <div className="absolute bottom-0 left-0 h-1 bg-blue-500 w-0 group-hover:w-full transition-all duration-500" />
         </div>
 
-        {/* Card 3 */}
         <div className="group relative bg-slate-50 p-6 h-full overflow-hidden border border-slate-200 transition-all hover:border-blue-500 hover:shadow-lg">
           <h3 className="text-2xl font-bold text-slate-900">Clear ROI for Businesses</h3>
           <p className="mt-4 text-slate-600">
@@ -55,7 +52,6 @@ const WhyInfraQoGrid: React.FC = () => {
           <div className="absolute bottom-0 left-0 h-1 bg-blue-500 w-0 group-hover:w-full transition-all duration-500" />
         </div>
 
-        {/* Card 4 */}
         <div className="group relative bg-slate-50 p-6 h-full overflow-hidden border border-slate-200 transition-all hover:border-blue-500 hover:shadow-lg">
           <h3 className="text-2xl font-bold text-slate-900">Peace of Mind for Homeowners</h3>
           <p className="mt-4 text-slate-600">

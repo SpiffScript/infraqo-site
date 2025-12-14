@@ -65,11 +65,9 @@ const WhyInfraQoFaq: React.FC = () => {
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
-      {/* Gradient divider */}
       <div className="my-10 w-full h-[10px] bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900" />
       <div className="pt-12 pb-20 container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         
-        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
             Common Questions
@@ -81,7 +79,6 @@ const WhyInfraQoFaq: React.FC = () => {
           <div className="mt-4 mx-auto w-20 h-1 bg-blue-600" />
         </div>
 
-        {/* FAQ list */}
         <div className="bg-white/90 shadow-md border border-slate-200 px-4 py-4 sm:px-6 sm:py-6">
           <div className="space-y-3">
             {faqData.map((item, index) => {

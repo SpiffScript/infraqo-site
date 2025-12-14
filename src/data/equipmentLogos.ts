@@ -3,7 +3,6 @@ export interface EquipmentLogo {
   alt: string;
 }
 
-// Logos live in /public/images/brands
 const orderedLogos: EquipmentLogo[] = [
   { src: "/images/brands/AcerIncLogo.svg", alt: "Acer" },
   { src: "/images/brands/AdvancedMicroDevicesLogo.svg", alt: "Advanced Micro Devices (AMD)" },
@@ -37,8 +36,6 @@ const orderedLogos: EquipmentLogo[] = [
   { src: "/images/brands/WesternDigitalLogo.svg", alt: "Western Digital" },
 ];
 
-
-// Fisher–Yates shuffle
 function shuffle<T>(array: T[]): T[] {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -48,5 +45,4 @@ function shuffle<T>(array: T[]): T[] {
   return arr;
 }
 
-// Export a shuffled list
 export const equipmentLogos = shuffle(orderedLogos);

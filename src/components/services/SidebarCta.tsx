@@ -15,11 +15,11 @@ const SidebarCta: React.FC = () => {
       </p>
 
       <div className="mt-7 flex flex-col gap-3">
-        <CtaButton href="/contact" variant="glow" className="w-full">
+        <CtaButton href="/contact" variant="blue" className="w-full">
             Free On-Site Assessment
         </CtaButton>
 
-        <CtaButton href="tel:7205154843" variant="glow" className="w-full">
+        <CtaButton href="tel:7205154843" variant="blue" className="w-full">
             Call (720) 515-4843
         </CtaButton>
         </div>

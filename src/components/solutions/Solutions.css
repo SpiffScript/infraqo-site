@@ -1,0 +1,116 @@
+/* PAGE WRAPPER */
+.solutions-page {
+  background: radial-gradient(circle at 20% 0%, #143a5b 0, #020814 52%, #010712 100%);
+  color: #f7fafc;
+  min-height: 100vh;
+}
+
+/* HERO */
+.solutions-hero {
+  padding-top: 3.5rem;
+  padding-bottom: 1rem;
+}
+
+.solutions-hero-copy {
+  max-width: none;
+}
+
+.solutions-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8fbbe2;
+  margin-bottom: 0.75rem;
+}
+
+.solutions-hero-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0 0 1.25rem;
+  color: #f7fafc;
+}
+
+.solutions-hero-lead {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  color: #d9e6f5;
+}
+
+.solutions-hero-sub {
+  font-size: 0.9rem;
+  color: #b0c6dd;
+}
+
+/* PLANS SECTION */
+.solutions-plans-section {
+  padding-bottom: 1.5rem;
+}
+
+.solutions-section-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0.3rem 0 0.6rem;
+  color: #f7fafc;
+}
+
+.solutions-section-lead {
+  font-size: 0.9rem;
+  color: #c2d5ea;
+  margin-bottom: 1.75rem;
+}
+
+/* BOTTOM SUMMARY GRID */
+.solutions-bottom-section {
+  padding-bottom: 3.5rem;
+}
+
+.solutions-bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.solutions-bottom-card {
+  border: 1px solid #22324a;
+  background: rgba(2, 10, 24, 0.9);
+  padding: 1.5rem 1.75rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.solutions-bottom-title {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.solutions-bottom-card p {
+  margin: 0 0 0.75rem;
+  color: #c2d5ea;
+}
+
+.solutions-bottom-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #c2d5ea;
+}
+
+.solutions-bottom-card li + li {
+  margin-top: 0.35rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .solutions-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .solutions-content-wrapper {
+    padding: 3rem 1.25rem;
+  }
+}

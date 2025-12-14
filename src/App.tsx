@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 import Services from "./components/Services";
+import Solutions from "./components/Solutions";
 import WhyInfraQo from "./components/WhyInfraQo";
 import ContactForm from "./components/ContactForm";
 import CaseStudies from "./components/CaseStudies";
@@ -19,11 +20,6 @@ import ScrollToTopButton from "./components/ui/ScrollToTopButton";
 import BlogPage from "./components/BlogPage";
 import TheDayEverythingWentDark from "./components/blog/TheDayEverythingWentDark";
 
-//
-// ────────────────────────────────────────────────────────────────────────────────
-// TITLE MANAGER – Updates <title>, <meta>, and JSON-LD when route changes
-// ────────────────────────────────────────────────────────────────────────────────
-//
 const TitleManager: React.FC = () => {
   const { pathname } = useLocation();
 
@@ -44,6 +40,12 @@ const TitleManager: React.FC = () => {
         title = "Services | InfraQo – Structured Cabling & IT Support";
         description =
           "Explore InfraQo’s services: structured cabling, networking and Wi-Fi, security cameras, managed IT support, and more.";
+        break;
+
+      case "/solutions":
+        title = "SolutionsQo | InfraQo Support Plans & Operational Reliability";
+        description =
+          "Explore TotalQo and PriorityQo, InfraQo’s structured support plans designed for long-term uptime, clean expectations, and operational stability.";
         break;
 
       case "/why-infraqo":
@@ -121,9 +123,6 @@ const TitleManager: React.FC = () => {
 
     metaDesc.content = description;
 
-    //
-    // JSON-LD structured data (LocalBusiness)
-    //
     const ldId = "infraqo-jsonld";
     let existingLd = document.getElementById(ldId) as HTMLScriptElement | null;
 
@@ -150,11 +149,6 @@ const TitleManager: React.FC = () => {
   return null;
 };
 
-//
-// ────────────────────────────────────────────────────────────────────────────────
-// SCROLL RESET
-// ────────────────────────────────────────────────────────────────────────────────
-//
 const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
 
@@ -167,21 +161,13 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-//
-// ────────────────────────────────────────────────────────────────────────────────
-// REAL <App /> COMPONENT
-// ────────────────────────────────────────────────────────────────────────────────
-//
 const App: React.FC = () => {
-  
-  //
-  // Disable right-click ONLY on images (site-wide)
-  //
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target && target.tagName.toLowerCase() === "img") {
-        e.preventDefault(); // Prevent Save Image As, etc.
+        e.preventDefault();
       }
     };
 
@@ -200,12 +186,12 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/solutions" element={<Solutions />} />
         <Route path="/why-infraqo" element={<WhyInfraQo />} />
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/blog" element={<BlogPage />} />
 
-        {/* Blog Posts */}
         <Route
           path="/blog/the-day-everything-went-dark"
           element={<TheDayEverythingWentDark />}
@@ -217,7 +203,6 @@ const App: React.FC = () => {
         <Route path="/acceptable-use" element={<AcceptableUse />} />
         <Route path="/careers" element={<CareersPage />} />
 
-        {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

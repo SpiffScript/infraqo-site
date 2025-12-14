@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import CtaButton from "../ui/CtaButton";
+import MidlistSupportCta from "./MidlistSupportCta";
 
 const BulletList = ({ children }) => (
   <ul className="mt-4 grid gap-2 text-sm text-slate-700 md:grid-cols-2">
@@ -14,47 +15,9 @@ const BulletList = ({ children }) => (
   </ul>
 );
 
-// Mid-list CTA panel (replaces the micro CTAs)
-const MidlistCTA = () => (
-  <div className="mt-12 mb-6">
-    <div
-      className="
-        bg-slate-900 text-slate-50 px-5 py-4
-        w-full max-w-4xl
-        flex flex-col gap-4
-        md:flex-row md:items-center md:justify-between
-      "
-    >
-      <p className="text-base md:text-lg font-semibold">
-        Talk with InfraQo about your next project.
-      </p>
-
-      <div className="flex flex-col gap-3 sm:flex-row sm:flex-nowrap">
-        <CtaButton
-          href="#contact"
-          variant="glow"
-          size="sm"
-          className="shrink-0"
-        >
-          Start your project
-        </CtaButton>
-        <CtaButton
-          href="tel:7205154843"
-          variant="glow"
-          size="sm"
-          className="shrink-0"
-        >
-          Call (720) 515-4843
-        </CtaButton>
-      </div>
-    </div>
-  </div>
-);
-
 const ServiceContent: React.FC = () => {
   return (
     <div className="mt-12 space-y-12">
-      {/* Structured Cabling */}
       <section id="structured-cabling">
         <h3 className="text-2xl font-bold text-slate-900">Structured Cabling</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
@@ -67,15 +30,14 @@ const ServiceContent: React.FC = () => {
 
         <BulletList>
           <span>Cat6 data and voice runs for offices and mixed-use spaces</span>
-          <span>Patch panel terminations and rack layout planning</span>
-          <span>Network closet cleanups and rework of spaghetti cabling</span>
+          <span>Rack installations, patch panel terminations and layout planning</span>
+          <span>Network closet cleanups and reorganizations</span>
           <span>Clear labeling and documentation for future work</span>
-          <span>Coordination with electricians and other trades</span>
+          <span>Smart device and low-voltage hardware integration</span>
           <span>Testing to confirm performance and identify issues early</span>
         </BulletList>
       </section>
 
-      {/* Networking & Wi-Fi */}
       <section id="networking-wifi">
         <h3 className="text-2xl font-bold text-slate-900">Networking & Wi-Fi</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
@@ -91,11 +53,10 @@ const ServiceContent: React.FC = () => {
           <span>VLANs and basic segmentation for secure environments</span>
           <span>Access point placement and real-world coverage tuning</span>
           <span>Mesh and controller-based Wi-Fi deployments</span>
-          <span>Right-sized network design for growing businesses</span>
+          <span>NAS and small server installations</span>
         </BulletList>
       </section>
 
-      {/* Security Cameras */}
       <section id="security-cameras">
         <h3 className="text-2xl font-bold text-slate-900">Security Cameras</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
@@ -115,7 +76,6 @@ const ServiceContent: React.FC = () => {
         </BulletList>
       </section>
 
-      {/* Managed IT Support */}
       <section id="managed-it-support">
         <h3 className="text-2xl font-bold text-slate-900">Managed IT Support</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
@@ -135,10 +95,8 @@ const ServiceContent: React.FC = () => {
         </BulletList>
       </section>
 
-      {/* Mid-list CTA panel */}
-      <MidlistCTA />
+      <MidlistSupportCta />
 
-      {/* Point-of-Sale Systems */}
       <section id="point-of-sale">
         <h3 className="text-2xl font-bold text-slate-900">Point-of-Sale Systems</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
@@ -158,29 +116,6 @@ const ServiceContent: React.FC = () => {
         </BulletList>
       </section>
 
-      {/* Installations & Configuration */}
-      <section id="installations-configuration">
-        <h3 className="text-2xl font-bold text-slate-900">
-          Installations & Configuration
-        </h3>
-        <div className="mt-2 h-0.5 w-20 bg-blue-600" />
-
-        <p className="mt-3 text-slate-600 max-w-3xl">
-          We take the hands-on projects most companies rush through and do them cleanly,
-          correctly, and with attention to detail.
-        </p>
-
-        <BulletList>
-          <span>Rack and cabinet installation with professional cable routing</span>
-          <span>Access point mounting (surface & in-ceiling)</span>
-          <span>Router, gateway & firewall configuration</span>
-          <span>Network closet cleanups and reorganizations</span>
-          <span>NAS and small server installations</span>
-          <span>Smart device and low-voltage hardware integration</span>
-        </BulletList>
-      </section>
-
-      {/* Cybersecurity */}
       <section id="cybersecurity">
         <h3 className="text-2xl font-bold text-slate-900">Cybersecurity</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />
@@ -200,7 +135,6 @@ const ServiceContent: React.FC = () => {
         </BulletList>
       </section>
 
-      {/* Operational Consulting */}
       <section id="operational-consulting">
         <h3 className="text-2xl font-bold text-slate-900">Operational Consulting</h3>
         <div className="mt-2 h-0.5 w-20 bg-blue-600" />

@@ -25,7 +25,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
 
   if (variant === "dark") {
     colorClasses = [
-      "text-blue-400 border-blue-400",
+      "text-sky-400 border-sky-400",
       "shadow-[0_0_10px_rgba(59,130,246,0.30)]",
       "hover:bg-blue-600 hover:text-white hover:border-blue-600",
       "hover:shadow-[0_0_18px_rgba(59,130,246,0.55)]",
@@ -36,6 +36,14 @@ const CtaButton: React.FC<CtaButtonProps> = ({
     "bg-blue-700 text-white border-blue-700",
     "shadow-[0_0_12px_rgba(37,99,235,0.45)]",
     "hover:bg-blue-500 hover:border-blue-500",
+    "hover:shadow-[0_0_20px_rgba(59,130,246,0.65)]",
+    "transition-shadow",
+  ].join(" ");
+  } else if (variant === "blue") {
+  colorClasses = [
+    "bg-blue-700 text-white border-blue-700",
+    "shadow-[0_0_12px_rgba(37,99,235,0.45)]",
+    "hover:bg-sky-400 hover:border-sku-400",
     "hover:shadow-[0_0_20px_rgba(59,130,246,0.65)]",
     "transition-shadow",
   ].join(" ");

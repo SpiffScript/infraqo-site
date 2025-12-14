@@ -25,15 +25,15 @@ const TrustedByTeamsPreview: React.FC = () => {
 
           <div className="md:w-1/2 flex flex-col justify-center text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-              Trusted by teams who cannot afford downtime.
+              Downtime is a tax on Revenue.
             </h2>
 
             <p className="mt-4 text-slate-600">
-              Disconnection doesn’t just slow things down — it breaks the rhythm
+              Disconnection doesn’t just slow things down – it breaks the rhythm
               of your day. InfraQo is here to solve your connectivity challenges
               so you can focus on what matters.
               <span className="block mt-2 font-semibold text-slate-900">
-                Learn to take your internet connection for granted again.
+                Trusted by teams who cannot afford downtime.
               </span>
             </p>
 

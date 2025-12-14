@@ -210,8 +210,8 @@ const TheDayEverythingWentDark: React.FC = () => {
                 <p>
                   It was a little after noon during a heavy lunch rush. I was
                   meeting with a food purveyor at my desk, talking through their new
-                  beef label I wasn’t actually interested in buying. Normal day, 
-                  normal operations – two well-known hotels and a full-service 
+                  beef label I wasn’t actually interested in buying. Normal day,
+                  normal operations – two well-known hotels and a full-service
                   restaurant all running at full steam.
                 </p>
                 <p>And then the POS system froze.</p>
@@ -572,12 +572,12 @@ const TheDayEverythingWentDark: React.FC = () => {
                 {
                 label: "Call or Text",
                 href: "tel:+17205154843",
-                variant: "glow",
+                variant: "dark",
                 },
                 {
                 label: "Email",
                 href: "mailto:support@infraqo.com",
-                variant: "glow",
+                variant: "dark",
                 },
                 {
                 label: "On-Site Review",

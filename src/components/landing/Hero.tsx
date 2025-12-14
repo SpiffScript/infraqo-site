@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CtaButton from "../ui/CtaButton";
+
 const headlines = [
   "Solving Your Operational Headaches.",
   "Protecting Your Business Uptime.",
@@ -35,21 +36,24 @@ const Hero: React.FC = () => {
       ></div>
       <div className="absolute inset-0 bg-gradient-to-t from-slate-800 via-slate-800/40 to-transparent"></div>
 
-      <div className="relative z-10 text-center px-4">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tighter">
+      <div className="relative z-10 text-center px-4 mb-10">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter">
           <span
             className={
               ctaHovered
-                ? "text-blue-400 drop-shadow-[0_0_18px_rgba(96,165,250,0.85)]"
-                : "text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.45)]"
+                ? "block text-blue-400 uppercase drop-shadow-[0_0_18px_rgba(96,165,250,0.85)]"
+                : "block text-blue-400 uppercase drop-shadow-[0_0_8px_rgba(96,165,250,0.45)]"
             }
           >
-            Reliability.
-          </span>{" "}
-          <span className="text-white">Delivered.</span>
+            IT SUPPORT
+          </span>
+          <span className="block mt-2 text-white">
+            Like your revenue depends on it.
+          </span>
         </h1>
 
-        <div className="h-12 md:h-16 mt-4 overflow-hidden">
+
+        <div className="h-12 md:h-16 mt-10 overflow-hidden">
           <div
             className={`transition-all duration-500 ease-in-out ${
               fade ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"

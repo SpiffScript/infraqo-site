@@ -1,9 +1,8 @@
-// src/components/services/ServiceDomains.tsx
 import React from "react";
 
 const ServiceDomains: React.FC = () => {
   return (
-    <div className="w-full flex justify-center mt-12">
+    <div className="w-full flex justify-center mt-16">
   <div className="bg-white w-full max-w-3xl mx-auto text-center py-6 shadow-lg border border-slate-200">
     <h3 className="text-2xl font-bold text-slate-900">
       Domain & Email Administration

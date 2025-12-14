@@ -1,4 +1,3 @@
-// src/components/services/ServiceCards.tsx
 import React from "react";
 import type { Service } from "../../types";
 import {
@@ -73,9 +72,7 @@ const servicesData: ServiceWithTarget[] = [
   },
 ];
 
-const HEADER_OFFSET = 96; // adjust if your nav height changes
-
-// Manual smooth scroll
+const HEADER_OFFSET = 96;
 const smoothScrollTo = (targetY: number, duration = 500) => {
   const startY = window.pageYOffset || document.documentElement.scrollTop;
   const distance = targetY - startY;

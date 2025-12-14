@@ -19,25 +19,22 @@ const WhyInfraQoFinalCta: React.FC = () => {
         </p>
 
         <div className="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-          {/* Solid blue */}
           <CtaButton
             href="tel:+17205154843"
-            variant= "blue"
+            variant= ""
             className="min-w-[11rem]"
           >
             Call or Text
           </CtaButton>
 
-          {/* Solid blue */}
           <CtaButton
             href="mailto:support@infraqo.com"
-            variant= "blue"
+            variant= ""
             className="min-w-[11rem]"
           >
             Email
           </CtaButton>
 
-          {/* Transparent / outline (default = light) */}
           <CtaButton to="/contact" className="min-w-[11rem]">
             Just browsing
           </CtaButton>

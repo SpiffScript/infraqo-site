@@ -12,19 +12,18 @@ const FinalCtaPreview: React.FC = () => {
               When real life depends on it.
             </span>
             <span className="block text-slate-50">
-              Your network should just work.
+              The cost of 'good enough' is never just price.
             </span>
           </h2>
 
           <p className="mt-4 text-slate-300">
-            Whether planning a project or fixing what’s already there, we start
-            with a straightforward conversation.
+            Your operational stability is too important for guesswork. Let's start the conversation.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <CtaButton
               href="tel:+17205154843"
-              variant="dark"
+              variant="blue"
               className="min-w-[11rem]"
             >
               Call or Text
@@ -32,13 +31,13 @@ const FinalCtaPreview: React.FC = () => {
 
             <CtaButton
               href="mailto:support@infraqo.com"
-              variant="dark"
+              variant="blue"
               className="min-w-[11rem]"
             >
               Email
             </CtaButton>
 
-            <CtaButton to="/contact" variant="dark" className="min-w-[11rem]">
+            <CtaButton to="/contact" variant="blue" className="min-w-[11rem]">
               Get Started
             </CtaButton>
           </div>

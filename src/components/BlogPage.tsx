@@ -52,7 +52,7 @@ const BlogPage: React.FC = () => {
                   holding everything together. The day it failed changed how I
                   think about infrastructure forever.
                 </p>
-                
+
                 <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
                   <Link
                     to="/blog/the-day-everything-went-dark"
@@ -76,12 +76,12 @@ const BlogPage: React.FC = () => {
                 {
                   label: "Call or Text",
                   href: "tel:+17205154843",
-                  variant: "glow",
+                  variant: "dark",
                 },
                 {
                   label: "Email",
                   href: "mailto:support@infraqo.com",
-                  variant: "glow",
+                  variant: "dark",
                 },
                 {
                   label: "Just Browsing",

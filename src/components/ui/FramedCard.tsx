@@ -1,10 +1,9 @@
-// src/components/FramedCard.tsx
 import React from "react";
 import CardUnderline from "./CardUnderline";
 
 type FramedCardProps = {
   children: React.ReactNode;
-  className?: string; // optional extra padding / layout tweaks
+  className?: string;
 };
 
 const FramedCard: React.FC<FramedCardProps> = ({ children, className = "" }) => (

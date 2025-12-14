@@ -1,4 +1,3 @@
-// src/components/services/ServicesCTA.tsx
 import React from "react";
 import CtaButton from "../ui/CtaButton";
 
@@ -17,11 +16,11 @@ const ServicesCTA: React.FC = () => {
       </div>
 
       <div className="flex flex-wrap gap-4">
-        <CtaButton href="#contact" variant="glow">
+        <CtaButton href="#contact" variant="blue">
           Let&apos;s Talk
         </CtaButton>
 
-        <CtaButton href="tel:17205154843" variant="glow">
+        <CtaButton href="tel:17205154843" variant="blue">
           Call (720) 515-4843
         </CtaButton>
       </div>

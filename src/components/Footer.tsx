@@ -9,9 +9,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-900 text-slate-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* TOP ROW */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
-          {/* Logo + Tagline */}
           <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <Link to="/" aria-label="Go to InfraQo home">
               <img
@@ -25,15 +23,19 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Nav + Socials (right aligned) */}
           <div className="flex flex-col items-center md:items-end gap-4">
-            {/* Nav links (line 1) */}
             <div className="flex space-x-6 text-sm font-semibold">
               <Link
                 to="/services"
                 className="hover:text-blue-400 transition-colors"
               >
                 Services
+              </Link>
+              <Link
+                to="/solutions"
+                className="hover:text-blue-400 transition-colors"
+              >
+                SolutionsQo
               </Link>
               <Link
                 to="/case-studies"
@@ -67,7 +69,6 @@ const Footer: React.FC = () => {
               </Link>
             </div>
 
-            {/* Social icons (line 2) */}
             <div className="flex space-x-4">
               <a
                 href="https://linkedin.com/company/infraqo"
@@ -100,10 +101,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Slate accent line */}
         <div className="mt-10 h-px bg-slate-800" />
 
-        {/* BOTTOM CENTERED BLOCK */}
         <div className="mt-6 text-center text-xs text-slate-500 space-y-2">
           <p>
             <a
@@ -125,7 +124,6 @@ const Footer: React.FC = () => {
             Colorado.
           </p>
 
-           {/* LEGAL LINKS */}
           <p className="space-x-3">
             <Link to="/privacy" className="hover:text-blue-400 transition-colors">
               Privacy Policy

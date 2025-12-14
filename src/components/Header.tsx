@@ -38,7 +38,6 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
-          {/* LOGO */}
           <Link to="/" aria-label="InfraQo Home" onClick={() => setIsMobileMenuOpen(false)}>
             <img
               src={isScrolled ? LogoColor : LogoMono}
@@ -47,13 +46,15 @@ const Header: React.FC = () => {
             />
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
           <nav
             className="hidden md:flex items-center space-x-8"
             aria-label="Main navigation"
           >
             <Link to="/services" className={navLinkClasses}>
               Services
+            </Link>
+            <Link to="/solutions" className={navLinkClasses}>
+              SolutionsQo
             </Link>
             <Link to="/why-infraqo" className={navLinkClasses}>
               Why InfraQo
@@ -69,20 +70,18 @@ const Header: React.FC = () => {
             </Link>
           </nav>
 
-          {/* DESKTOP CTA BUTTON */}
           <Link to="/contact" className={ctaClasses}>
             Free Consultation
           </Link>
 
-          {/* MOBILE MENU BUTTON */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden flex flex-col justify-center items-center space-y-1.5 p-2 border 
+            className={`md:hidden flex flex-col justify-center items-center space-y-1.5 p-2 border
               ${
                 isScrolled
-                  ? "border-slate-400 text-slate-900"  // dark lines on white header
-                  : "border-slate-600 text-slate-200"  // light lines on dark header
+                  ? "border-slate-400 text-slate-900"
+                  : "border-slate-600 text-slate-200"
               }
             `}
             aria-label="Toggle menu"
@@ -106,7 +105,6 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU DROPDOWN */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-slate-900 border-t border-slate-700 px-4 pb-6 pt-3 space-y-4">
           <Link
@@ -115,6 +113,13 @@ const Header: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Services
+          </Link>
+          <Link
+            to="/solutions"
+            className="block text-slate-200 text-sm font-semibold"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            SolutionsQo
           </Link>
           <Link
             to="/why-infraqo"

@@ -50,13 +50,11 @@ const ContactForm: React.FC = () => {
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
   
-  // Captcha State
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
   const captchaContainerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
 
-  // Initialize reCAPTCHA
   useEffect(() => {
     const renderCaptcha = () => {
       if (
@@ -82,11 +80,9 @@ const ContactForm: React.FC = () => {
       }
     };
 
-    // Check if grecaptcha is already loaded
     if (window.grecaptcha && window.grecaptcha.render) {
       renderCaptcha();
     } else {
-      // Poll for script load if not yet available
       const interval = setInterval(() => {
         if (window.grecaptcha && window.grecaptcha.render) {
           renderCaptcha();
@@ -205,7 +201,6 @@ const ContactForm: React.FC = () => {
       return;
     }
 
-    // Captcha Verification
     if (!captchaToken) {
       setCaptchaError(true);
       return;
@@ -323,7 +318,6 @@ const ContactForm: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
             
-            {/* Row 1: First Name & Last Name */}
             <div>
               <label htmlFor="firstName" className={labelClasses}>First Name <span className="text-blue-600">*</span></label>
               <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses} placeholder="First name" />
@@ -336,7 +330,6 @@ const ContactForm: React.FC = () => {
               {errors.lastName && touched.lastName && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.lastName}</p>}
             </div>
 
-            {/* Row 2: Phone & Email */}
             <div>
               <label htmlFor="phone" className={labelClasses}>Phone Number <span className="text-blue-600">*</span></label>
               <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses} placeholder="(555) 123-4567" />
@@ -349,22 +342,18 @@ const ContactForm: React.FC = () => {
               {errors.email && touched.email && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.email}</p>}
             </div>
 
-            {/* Row 3: Business Name (Full Width) */}
             <div className="md:col-span-2">
               <label htmlFor="businessName" className={labelClasses}>Business Name</label>
               <input type="text" id="businessName" name="businessName" value={formData.businessName} onChange={handleInputChange} onBlur={handleBlur} className={inputClasses} placeholder="Company Name, Inc." />
             </div>
 
-            {/* Row 4: Service Location (Full Width Container) */}
             <div className="md:col-span-2">
               <label className={labelClasses}>Service Location <span className="text-blue-600">*</span></label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* City, State */}
                 <div className="md:col-span-2">
                   <input type="text" id="location" name="location" value={formData.location} onChange={handleInputChange} onBlur={handleBlur} className={inputClasses} placeholder="City, State" />
                    {errors.location && touched.location && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.location}</p>}
                 </div>
-                {/* ZIP */}
                 <div className="md:col-span-1">
                   <input type="text" id="zip" name="zip" value={formData.zip} onChange={handleInputChange} onBlur={handleBlur} className={inputClasses} placeholder="ZIP Code" maxLength={5} />
                   {errors.zip && touched.zip && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.zip}</p>}
@@ -373,9 +362,7 @@ const ContactForm: React.FC = () => {
               <p className="text-xs text-slate-400 mt-2 italic">Your primary service location helps us get started. Additional sites will be assessed after consultation.</p>
             </div>
 
-            {/* Row 5: Contact Method & Project Type */}
             <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Preferred Contact Method */}
               <div>
                 <label className={labelClasses}>Preferred Contact Method</label>
                 <div className="inline-flex bg-slate-100 p-1 border border-slate-200 rounded-sm w-full">
@@ -396,7 +383,6 @@ const ContactForm: React.FC = () => {
                 </div>
               </div>
 
-              {/* Project Type */}
               <div>
                 <label className={labelClasses}>Project Type</label>
                 <div className="inline-flex bg-slate-100 p-1 border border-slate-200 rounded-sm w-full">
@@ -418,9 +404,7 @@ const ContactForm: React.FC = () => {
               </div>
             </div>
 
-            {/* Row 6: Services & Locations Row */}
             <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Services Dropdown (Wider) */}
               <div className="md:col-span-2">
                 <label className={labelClasses}>Service Areas Needed <span className="text-blue-600">*</span></label>
                 <div className="relative" ref={servicesDropdownRef}>
@@ -436,7 +420,8 @@ const ContactForm: React.FC = () => {
                       {formData.services.length === 1 && formData.services[0]}
                       {formData.services.length > 1 && `${formData.services.length} services selected`}
                     </span>
-                    <svg className={`w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-2 ${isServicesDropdownOpen ? 'transform rotate-180 text-blue-500' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    <svg className={`w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-2 ${isServicesDropdownOpen ? 'transform rotate-180 text-blue-500' : ''}`} 
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   {isServicesDropdownOpen && (
                     <div className="absolute z-20 w-full mt-1 bg-white border border-slate-200 shadow-2xl max-h-60 overflow-y-auto">
@@ -457,7 +442,6 @@ const ContactForm: React.FC = () => {
                 {errors.services && touched.services && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.services}</p>}
               </div>
 
-              {/* Number of Locations (Narrower) */}
               <div className="md:col-span-1">
                 <label htmlFor="numLocations" className={labelClasses}>Number of Locations</label>
                 <div className="relative">
@@ -472,14 +456,13 @@ const ContactForm: React.FC = () => {
               </div>
             </div>
 
-             {/* Description / Help With */}
             <div className="md:col-span-2">
               <label htmlFor="helpWith" className={labelClasses}>Project Details <span className="text-blue-600">*</span></label>
-              <textarea id="helpWith" name="helpWith" rows={5} value={formData.helpWith} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses} placeholder="How can we help? Tell us a little about your project or issue."></textarea>
+              <textarea id="helpWith" name="helpWith" rows={5} value={formData.helpWith} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses} 
+              placeholder="How can we help? Tell us a little about your project or issue."></textarea>
               {errors.helpWith && touched.helpWith && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.helpWith}</p>}
             </div>
 
-            {/* Timeline - Half Width */}
             <div className="md:col-span-1">
               <label htmlFor="timeline" className={labelClasses}>Project Timeline</label>
               <div className="relative">
@@ -492,7 +475,6 @@ const ContactForm: React.FC = () => {
               </div>
             </div>
 
-            {/* How Did You Hear - Half Width */}
              <div className="md:col-span-1">
               <label htmlFor="howDidYouHear" className={labelClasses}>How did you hear about us?</label>
                <div className="relative">
@@ -506,7 +488,6 @@ const ContactForm: React.FC = () => {
                </div>
             </div>
 
-            {/* Terms Checkbox */}
             <div className="md:col-span-2 space-y-4">
                <div>
                  <label className="flex items-start space-x-3 text-sm text-slate-600 cursor-pointer group">
@@ -522,7 +503,6 @@ const ContactForm: React.FC = () => {
             </div>
           </div>
           
-          {/* CAPTCHA */}
             <div className="w-full mt-10 mb-6 pt-6 border-t border-slate-100">
               <label className={labelClasses}>
                 Security Verification <span className="text-blue-600">*</span>
@@ -541,7 +521,8 @@ const ContactForm: React.FC = () => {
             <button 
               type="submit" 
               disabled={!areFieldsValid || submissionState === 'submitting'} 
-              className="w-full md:w-auto bg-slate-900 text-white font-bold uppercase tracking-widest py-4 px-12 transition-all duration-300 shadow-lg hover:shadow-blue-500/20 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-900"
+              className="w-full md:w-auto bg-slate-900 text-white font-bold uppercase tracking-widest py-4 px-12 transition-all duration-300 
+              shadow-lg hover:shadow-blue-500/20 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-900"
             >
               {submissionState === 'submitting' ? 'Sending...' : 'Send Request'}
             </button>

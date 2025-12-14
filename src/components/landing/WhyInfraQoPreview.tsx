@@ -45,7 +45,7 @@ const WhyInfraQoSection: React.FC = () => {
               treat your environment like it’s our own.
             </p>
 
-            <CtaButton to="/why-infraqo" variant="dark" className="mt-5">
+            <CtaButton to="/why-infraqo" variant="blue" className="mt-5">
               Learn more about our approach
             </CtaButton>
 

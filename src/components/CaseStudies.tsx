@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import type { CaseStudy, Testimonial } from "../types";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
-// --- Metrics icons ---
-
 const ShieldCheckIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path
@@ -30,8 +28,6 @@ const BriefcaseIcon: React.FC<{ className?: string }> = ({ className }) => (
     <path strokeLinecap="square" strokeLinejoin="miter" d="M8 8V5c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v3" />
   </svg>
 );
-
-// --- Metrics ---
 
 const metricsData = [
   { value: 99, unit: "%", label: "Uptime Reliability", icon: ShieldCheckIcon },
@@ -64,8 +60,6 @@ const CountUp: React.FC<{ target: number; duration?: number }> = ({ target, dura
   return <>{count}</>;
 };
 
-// --- Case study data ---
-
 const caseStudiesData: CaseStudy[] = [
   {
     client: "Oak & Ember Bistro",
@@ -96,8 +90,6 @@ const caseStudiesData: CaseStudy[] = [
   },
 ];
 
-// --- Testimonials data (moved from Testimonials.tsx) ---
-
 const testimonialsData: Testimonial[] = [
   {
     quote:
@@ -123,16 +115,13 @@ const testimonialsData: Testimonial[] = [
 ];
 
 const CaseStudies: React.FC = () => {
-  // Always start this page at the top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Case studies visibility
   const caseRef = useRef<HTMLElement>(null);
   const caseVisible = useIntersectionObserver(caseRef, { threshold: 0.1 });
 
-  // Metrics visibility / trigger
   const metricsRef = useRef<HTMLElement>(null);
   const [metricsVisible, setMetricsVisible] = useState(false);
 
@@ -148,7 +137,6 @@ const CaseStudies: React.FC = () => {
     return () => obs.disconnect();
   }, []);
 
-  // Testimonials slider (moved over from Testimonials.tsx)
   const testimonialsSectionRef = useRef<HTMLElement>(null);
   const testimonialsVisible = useIntersectionObserver(testimonialsSectionRef, { threshold: 0.1 });
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -189,7 +177,6 @@ const CaseStudies: React.FC = () => {
 
   return (
     <main>
-      {/* TOP SECTION — Performance Snapshots */}
       <section
         id="casestudies"
         ref={caseRef}
@@ -238,7 +225,6 @@ const CaseStudies: React.FC = () => {
         </div>
       </section>
 
-      {/* METRICS STRIP */}
       <section
         ref={metricsRef}
         className="py-16 bg-slate-950"
@@ -274,7 +260,6 @@ const CaseStudies: React.FC = () => {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
       <section
         id="testimonials"
         ref={testimonialsSectionRef}
@@ -330,7 +315,6 @@ const CaseStudies: React.FC = () => {
               ))}
             </div>
 
-            {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
               className="absolute top-1/2 left-0 md:-left-16 transform -translate-y-1/2 p-2 text-slate-500 hover:text-slate-900 transition-colors"
@@ -350,7 +334,6 @@ const CaseStudies: React.FC = () => {
               </svg>
             </button>
 
-            {/* Navigation Dots */}
             <div className="flex justify-center space-x-3 mt-8">
               {testimonialsData.map((_, index) => (
                 <button

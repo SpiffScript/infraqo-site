@@ -8,12 +8,10 @@ const WhyInfraQoSuccessBanner: React.FC = () => {
     const phrase = "is in the details.";
     let typeInterval: number | undefined;
 
-    // Fade in "Success..." over a few seconds
     const fadeTimer = window.setTimeout(() => {
       setSuccessVisible(true);
-    }, 200); // small delay before we start the fade
+    }, 200);
 
-    // Start typing after a bit so they overlap nicely
     const typeTimer = window.setTimeout(() => {
       let i = 0;
       typeInterval = window.setInterval(() => {
@@ -22,8 +20,8 @@ const WhyInfraQoSuccessBanner: React.FC = () => {
         if (i >= phrase.length && typeInterval !== undefined) {
           window.clearInterval(typeInterval);
         }
-      }, 140); // adjust for how fast you want the typing
-    }, 2200); // typing starts ~2.2s in
+      }, 140);
+    }, 2200);
 
     return () => {
       window.clearTimeout(fadeTimer);
@@ -36,19 +34,16 @@ const WhyInfraQoSuccessBanner: React.FC = () => {
 
   return (
     <section className="relative w-full h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden bg-slate-900">
-      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-40"
         style={{
           backgroundImage:
-            "url('https://images.pexels.com/photos/9224680/pexels-photo-9224680.jpeg')", // swap this later if you want
+            "url('https://images.pexels.com/photos/9224680/pexels-photo-9224680.jpeg')",
         }}
       />
 
-      {/* Subtle overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
 
-      {/* Content */}
       <div className="relative z-10 h-full flex items-center justify-center px-4">
         <div className="text-center max-w-3xl">
           <p

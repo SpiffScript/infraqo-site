@@ -1,7 +1,7 @@
 .service-line:hover .service-dot {
   width: 0.5rem;
   height: 0.5rem;
-  background-color: #2563eb; /* blue-600 */
+  background-color: #2563eb;
 }
 
 .service-line:hover .service-text {
@@ -9,7 +9,6 @@
   font-weight: 600;
 }
 
-/* Make images harder to drag / select globally */
 img {
   -webkit-user-drag: none;
   user-drag: none;
@@ -28,12 +27,10 @@ img {
   }
 }
 
-/* Outer shell: just clipping + hover control */
 .logo-marquee {
   overflow: hidden;
 }
 
-/* Inner track */
 .logo-track {
   display: flex;
   min-width: max-content;
@@ -45,7 +42,6 @@ img {
   animation-play-state: paused;
 }
 
-/* Prevent drag or select, site-wide */
 img {
   -webkit-user-drag: none;
   user-drag: none;

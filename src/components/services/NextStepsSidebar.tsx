@@ -3,31 +3,31 @@ import React from "react";
 const steps = [
   {
     label: "Discovery",
-    text: "We start with a focused conversation about your sites, pain points, and priorities so we understand what actually matters to your business.",
+    text: "We start with a focused conversation about your sites, pain points, and priorities. This ensures our solution is perfectly aligned with your immediate needs and long-term goals.",
   },
   {
     label: "Site Assessment",
-    text: "We review your existing setup or walk the space in person, mapping out cabling, equipment, and constraints so recommendations match reality.",
+    text: "We conduct an on-site or virtual review of your existing setup, mapping cabling, equipment, and physical constraints. This guarantees our technical recommendations match your environment's reality.",
   },
   {
     label: "Clear Recommendations",
-    text: "You'll see straightforward options, costs, and trade-offs in plain language. No jargon, no surprise line items, and no pressure to overspend.",
+    text: "You receive straightforward options, clear costs, and honest trade-offs presented in plain language. We guarantee no technical jargon, no surprise line items, and absolutely no pressure to overspend.",
   },
   {
     label: "Project Scheduling",
-    text: "Together we lock in scope, timeline, and access details so work is scheduled around your operations, not the other way around.",
+    text: "Together we lock in the final scope, timeline, and logistical access details. Our priority is scheduling the work around your core business operations, ensuring minimal downtime and disruption.",
   },
   {
     label: "Installation & Verification",
-    text: "We execute the plan, label and document your architecture, including verification of performance so your network is stable, supportable, and ready for what's next.",
+    text: "We execute the plan, provide you with a full systematic equipment inventory, document your architecture, and conduct rigorous performance verification. You enjoy a powerful new network that is stable, secure, and meticulously built to accelerate your business growth.",
   },
   {
     label: "Documentation & Handoff",
-    text: "We deliver labeling, diagrams, and any reference documentation you need so your network is clear, maintainable, and fully yours.",
+    text: "We provide you with comprehensive mapping, network diagrams, and key reference documentation. Your new network will be clear, fully maintainable, and completely owned by your team.",
   },
   {
     label: "Ongoing Support",
-    text: "We stay available after the install – handling updates, tuning, and support so your network remains stable, fast, and straightforward to manage.",
+    text: "We remain available with ongoing support, system updates, and performance tuning. We ensure your network stays stable, protected, and lightning fast, long after the installation is complete.",
   },
 ];
 
@@ -36,28 +36,24 @@ const NextStepsSidebar: React.FC = () => {
     <aside className="mt-12 hidden lg:block">
       <div className="bg-slate-50 border border-slate-200 px-10 py-12 w-[115%] -ml-6">
 
-        {/* Header */}
         <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 text-center">
-          Next Steps
+          Concept to Completion
         </h2>
         <p className="mt-4 text-base text-slate-600 text-center max-w-sm mx-auto">
-          A simple, predictable path from first conversation to a clean, stable install.
+          Our 7-step system for transforming complex visions into a clear, stable reality.
         </p>
 
-        {/* Steps */}
         <ol className="mt-12 space-y-14">
           {steps.map((step, index) => (
             <li
               key={step.label}
               className="grid grid-cols-[20px_1fr] gap-x-4"
             >
-              {/* Left spine column */}
               <div className="flex flex-col items-center">
                 {index !== 0 && (
                   <div className="flex-1 w-px bg-slate-200" />
                 )}
 
-                {/* Stylized DOT */}
                 <div
                   className={`
                     h-3.5 w-3.5 rounded-full
@@ -70,7 +66,6 @@ const NextStepsSidebar: React.FC = () => {
                 )}
               </div>
 
-              {/* Text column */}
               <div>
                 <div className="text-2xl font-bold text-slate-900">
                   <span className="mr-2 text-blue-600 font-extrabold">
