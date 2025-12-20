@@ -5,7 +5,7 @@ import type { PagesFunction, Response as CFResponse } from "@cloudflare/workers-
 export interface Env {
   RECAPTCHA_SECRET: string;
 
-  // Resend API key (create one dedicated for Contact if you want)
+  // Resend API key
   RESEND_API_KEY: string;
 
   // Contact form sender (you want support@infraqo.com)
@@ -26,11 +26,8 @@ function json(data: unknown, status = 200): CFResponse {
   }) as unknown as CFResponse;
 }
 
-function safe(v: unknown): string {
-  if (v === null || v === undefined) return "";
-  if (typeof v === "string") return v.trim();
-  if (typeof v === "number" || typeof v === "boolean") return String(v);
-  return "";
+function safe(v: unknown) {
+  return String(v ?? "").trim();
 }
 
 function safeArray(v: unknown): string[] {
@@ -38,8 +35,8 @@ function safeArray(v: unknown): string[] {
   return v.map((x) => safe(x)).filter(Boolean);
 }
 
-function escapeHtml(input: string): string {
-  const s = safe(input);
+function escapeHtml(input: string) {
+  const s = String(input ?? "");
   return s
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -68,7 +65,7 @@ async function verifyRecaptchaV2(opts: {
 
   return {
     ok: Boolean(data?.success),
-    hostname: safe(data?.hostname),
+    hostname: data?.hostname,
     errorCodes: Array.isArray(data?.["error-codes"]) ? data["error-codes"] : undefined,
   };
 }
@@ -80,7 +77,7 @@ async function sendViaResend(opts: {
   subject: string;
   text: string;
   html: string;
-}): Promise<any> {
+}) {
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -104,6 +101,20 @@ async function sendViaResend(opts: {
   return resp.json();
 }
 
+/**
+ * Matches ContactForm.tsx payload shape:
+ * {
+ *   captchaToken,
+ *   customer: { firstName, lastName, businessName, email, phone },
+ *   contact: { preferredMethod, bestTime, howDidYouHear, message },
+ *   project: { projectType, timeline, helpWith },
+ *   services: { requested: string[], other: string },
+ *   company: { businessName },
+ *   location: { cityState, zip, numLocations },
+ *   meta: { agreedToTerms, subscribe },
+ *   submittedAt
+ * }
+ */
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   if (!request.headers.get("content-type")?.includes("application/json")) {
     return json({ ok: false, error: "Expected application/json" }, 400);
@@ -116,7 +127,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, error: "Invalid JSON" }, 400);
   }
 
-  // Must match ContactForm.tsx (captchaToken)
   const captchaToken = safe(payload?.captchaToken);
   if (!captchaToken) {
     return json({ ok: false, error: "Missing captcha token" }, 400);
@@ -144,45 +154,102 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
-  // --------- Match ContactForm.tsx nested payload ----------
-
+  // ---- Read fields EXACTLY how ContactForm.tsx sends them ----
   const firstName = safe(payload?.customer?.firstName);
   const lastName = safe(payload?.customer?.lastName);
   const fullName = safe(`${firstName} ${lastName}`.trim());
 
-  const email = safe(payload?.contact?.email);
-  const phone = safe(payload?.contact?.phone);
-  const preferredContact = safe(payload?.contact?.preferredContact);
+  const email = safe(payload?.customer?.email);
+  const phone = safe(payload?.customer?.phone);
 
-  const businessName = safe(payload?.company?.businessName);
+  const businessName =
+    safe(payload?.company?.businessName) || safe(payload?.customer?.businessName);
 
-  const city = safe(payload?.location?.city);
-  const state = safe(payload?.location?.state);
+  const preferredContact = safe(payload?.contact?.preferredMethod);
+  const bestTimeToReach = safe(payload?.contact?.bestTime);
+  const howDidYouHear = safe(payload?.contact?.howDidYouHear);
+  const message = safe(payload?.contact?.message);
+
+  const cityState = safe(payload?.location?.cityState);
   const zip = safe(payload?.location?.zip);
   const numLocations = safe(payload?.location?.numLocations);
 
   const projectType = safe(payload?.project?.projectType);
-  const details = safe(payload?.project?.details);
   const timeline = safe(payload?.project?.timeline);
-  const heardFrom = safe(payload?.project?.heardFrom);
+  const helpWith = safe(payload?.project?.helpWith);
 
-  const servicesRequested = safeArray(payload?.services?.serviceAreas);
+  const servicesRequested = safeArray(payload?.services?.requested);
+  const servicesOther = safe(payload?.services?.other);
 
-  const agreeToTerms = payload?.meta?.agreeToTerms ? "Yes" : "No";
-  const sendUpdates = payload?.meta?.sendUpdates ? "Yes" : "No";
+  const agreedToTerms = payload?.meta?.agreedToTerms ? "Yes" : "No";
+  const subscribe = payload?.meta?.subscribe ? "Yes" : "No";
 
-  // Subject: keep it human; never allow objects to leak in
+  // ---- Subject (no leaking [object Object]) ----
   const subjectParts = [
     "InfraQo Contact Request",
-    fullName || email || phone
-      ? `(${[fullName, email, phone].filter(Boolean).join(" | ")})`
-      : "",
-  ].filter(Boolean);
+    businessName ? `— ${businessName}` : "",
+    fullName ? `(${fullName})` : "",
+    email ? email : "",
+    phone ? phone : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-  const subject = subjectParts.join(" ");
+  // ---- Email body ----
+  const rows = (label: string, value: string) => `
+    <tr>
+      <td style="padding:6px 10px; font-weight:600; white-space:nowrap; vertical-align:top;">${escapeHtml(
+        label
+      )}</td>
+      <td style="padding:6px 10px; vertical-align:top;">${escapeHtml(value || "(not provided)")}</td>
+    </tr>
+  `;
 
-  const locationLine =
-    [city, state, zip].filter(Boolean).join(", ") || "(not provided)";
+  const servicesBlock =
+    servicesRequested.length || servicesOther
+      ? `
+        <ul style="margin:8px 0 0 18px; padding:0;">
+          ${servicesRequested.map((s: string) => `<li>${escapeHtml(s)}</li>`).join("")}
+          ${servicesOther ? `<li><strong>Other:</strong> ${escapeHtml(servicesOther)}</li>` : ""}
+        </ul>
+      `
+      : `<div style="color:#666; margin-top:6px;">(not provided)</div>`;
+
+  const html = `
+  <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.35;">
+    <h2 style="margin:0 0 10px;">New Contact Request (InfraQo)</h2>
+
+    <table style="border-collapse:collapse; width:100%; max-width:820px;">
+      ${rows("Name", fullName)}
+      ${rows("Email", email)}
+      ${rows("Phone", phone)}
+      ${rows("Company", businessName)}
+      ${rows("Preferred Contact", preferredContact)}
+      ${rows("Best Time", bestTimeToReach)}
+      ${rows("How They Heard", howDidYouHear)}
+      ${rows("Project Type", projectType)}
+      ${rows("Timeline", timeline)}
+      ${rows("Help With", helpWith)}
+      ${rows("Location", cityState)}
+      ${rows("ZIP", zip)}
+      ${rows("# Locations", numLocations)}
+      ${rows("Agreed To Terms", agreedToTerms)}
+      ${rows("Subscribe", subscribe)}
+    </table>
+
+    <div style="margin:14px 0 6px; font-weight:700;">Services Requested</div>
+    ${servicesBlock}
+
+    <div style="margin:14px 0 6px; font-weight:700;">Message</div>
+    <div style="border:1px solid #e5e7eb; padding:10px; border-radius:8px; background:#fafafa;">
+      ${escapeHtml(message || "(not provided)")}
+    </div>
+
+    <div style="margin-top:14px; color:#666; font-size:12px;">
+      IP: ${escapeHtml(ip || "(unknown)")}
+    </div>
+  </div>
+  `.trim();
 
   const text = [
     "New Contact Request (InfraQo)",
@@ -192,111 +259,35 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     `Phone: ${phone || "(not provided)"}`,
     `Company: ${businessName || "(not provided)"}`,
     `Preferred Contact: ${preferredContact || "(not provided)"}`,
+    `Best Time: ${bestTimeToReach || "(not provided)"}`,
+    `How They Heard: ${howDidYouHear || "(not provided)"}`,
     `Project Type: ${projectType || "(not provided)"}`,
-    `Location: ${locationLine}`,
-    `# Locations: ${numLocations || "(not provided)"}`,
-    `Services: ${servicesRequested.length ? servicesRequested.join(", ") : "(not provided)"}`,
     `Timeline: ${timeline || "(not provided)"}`,
-    `Heard From: ${heardFrom || "(not provided)"}`,
-    `Agree to be contacted: ${agreeToTerms}`,
-    `Send updates: ${sendUpdates}`,
-    `IP: ${ip || "(unknown)"}`,
+    `Help With: ${helpWith || "(not provided)"}`,
+    `Location: ${cityState || "(not provided)"}`,
+    `ZIP: ${zip || "(not provided)"}`,
+    `# Locations: ${numLocations || "(not provided)"}`,
+    `Agreed To Terms: ${agreedToTerms}`,
+    `Subscribe: ${subscribe}`,
     "",
-    "Project Details:",
-    details || "(not provided)",
+    "Services Requested:",
+    ...(servicesRequested.length ? servicesRequested.map((s) => `- ${s}`) : ["(not provided)"]),
+    ...(servicesOther ? [`- Other: ${servicesOther}`] : []),
+    "",
+    "Message:",
+    message || "(not provided)",
+    "",
+    `IP: ${ip || "(unknown)"}`,
   ].join("\n");
 
-  const html = `
-    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:#111827;">
-      <h2 style="margin:0 0 12px 0;">New Contact Request (InfraQo)</h2>
-
-      <table style="border-collapse: collapse; width: 100%; max-width: 760px;">
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Name</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(fullName) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Email</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(email) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Phone</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(phone) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Company</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(businessName) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Preferred Contact</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(preferredContact) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Project Type</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(projectType) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Location</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(locationLine) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b># Locations</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(numLocations) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Services</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${
-            servicesRequested.length ? escapeHtml(servicesRequested.join(", ")) : "(not provided)"
-          }</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Timeline</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(timeline) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Heard From</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(heardFrom) || "(not provided)"}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Agree to be contacted</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(agreeToTerms)}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Send updates</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(sendUpdates)}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>IP</b></td>
-          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(safe(ip)) || "(unknown)"}</td>
-        </tr>
-      </table>
-
-      <h3 style="margin:16px 0 6px 0;">Project Details</h3>
-      <div style="white-space:pre-wrap; border:1px solid #e5e7eb; padding:10px; max-width:760px;">
-        ${escapeHtml(details) || "(not provided)"}
-      </div>
-    </div>
-  `.trim();
-
-  try {
-    await sendViaResend({
-      apiKey: env.RESEND_API_KEY,
-      from: env.EMAIL_FROM_CONTACT,
-      to: env.EMAIL_TO_CONTACT,
-      subject,
-      text,
-      html,
-    });
-  } catch (err: any) {
-    return json(
-      {
-        ok: false,
-        error: "Email send failed",
-        details: safe(err?.message) || "Unknown error",
-      },
-      500
-    );
-  }
+  await sendViaResend({
+    apiKey: env.RESEND_API_KEY,
+    from: env.EMAIL_FROM_CONTACT,
+    to: env.EMAIL_TO_CONTACT,
+    subject: subjectParts,
+    text,
+    html,
+  });
 
   return json({ ok: true });
 };

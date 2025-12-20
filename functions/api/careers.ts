@@ -4,7 +4,7 @@ export interface Env {
   CAREERS_KV: KVNamespace;
   CAREERS_BUCKET: R2Bucket;
 
-  EMAIL_API_KEY: string;
+  RESEND_API_KEY: string;
   EMAIL_FROM: string;
   EMAIL_TO: string;
 }
@@ -161,7 +161,7 @@ async function sendNotificationEmail(
   await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${env.EMAIL_API_KEY}`,
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
