@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-4">
-            <div className="flex space-x-6 text-sm font-semibold">
+            <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-sm font-semibold">
               <Link
                 to="/services"
                 className="hover:text-blue-400 transition-colors"
