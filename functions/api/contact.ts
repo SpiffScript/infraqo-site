@@ -8,74 +8,38 @@ export interface Env {
   EMAIL_TO_CONTACT: string;
 }
 
-function json(data: unknown, status = 200): CFResponse {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { "Content-Type": "application/json" },
-  }) as unknown as CFResponse;
-}
-
-function safe(v: unknown) { return String(v ?? "").trim(); }
+const json = (data: any, status = 200) => new Response(JSON.stringify(data), {
+  status,
+  headers: { "Content-Type": "application/json" }
+}) as unknown as CFResponse;
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  let payload: any;
   try {
-    payload = await request.json();
-  } catch {
-    return json({ ok: false, error: "Invalid JSON" }, 400);
-  }
+    const payload = await request.json() as any;
 
-  // NESTED MAPPINGS: Matching your handleSubmit structure exactly
-  const firstName = safe(payload?.customer?.firstName);
-  const lastName = safe(payload?.customer?.lastName);
-  const fullName = `${firstName} ${lastName}`.trim();
-  const projectType = safe(payload?.customer?.projectType);
+    // VERIFIED MAPPINGS FROM YOUR ContactForm.tsx
+    const firstName = payload?.customer?.firstName || "";
+    const lastName = payload?.customer?.lastName || "";
+    const fullName = `${firstName} ${lastName}`.trim();
 
-  const businessName = safe(payload?.company?.businessName);
+    const businessName = payload?.company?.businessName || "N/A";
 
-  const email = safe(payload?.contact?.email);
-  const phone = safe(payload?.contact?.phone);
-  const contactMethod = safe(payload?.contact?.preferredMethod);
+    const email = payload?.contact?.email || "";
+    const phone = payload?.contact?.phone || "";
+    const preferredMethod = payload?.contact?.preferredMethod || "";
 
-  const cityState = safe(payload?.location?.cityState);
-  const zip = safe(payload?.location?.zip);
-  const numLocations = safe(payload?.location?.numLocations);
+    const cityState = payload?.location?.cityState || "";
+    const zip = payload?.location?.zip || "";
 
-  const services = Array.isArray(payload?.services?.requested) ? payload.services.requested : [];
+    const services = payload?.services?.requested || [];
+    const details = payload?.project?.details || "";
+    const timeline = payload?.project?.timeline || "";
+    const heardFrom = payload?.project?.heardFrom || "";
 
-  const helpWith = safe(payload?.project?.details);
-  const timeline = safe(payload?.project?.timeline);
-  const howDidYouHear = safe(payload?.project?.heardFrom);
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
 
-  const agreeToTerms = payload?.meta?.agreeToTerms ? "Yes" : "No";
-  const sendUpdates = payload?.meta?.sendUpdates ? "Yes" : "No";
-  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-
-  const subject = `InfraQo Lead: ${fullName} (${businessName || 'Residential'})`;
-
-  const html = `
-    <div style="font-family: sans-serif; line-height: 1.5; color: #333;">
-      <h2 style="color: #1e293b;">New Website Inquiry</h2>
-      <hr />
-      <p><b>Name:</b> ${fullName}</p>
-      <p><b>Business:</b> ${businessName || "N/A"}</p>
-      <p><b>Email:</b> ${email}</p>
-      <p><b>Phone:</b> ${phone}</p>
-      <p><b>Location:</b> ${cityState} (${zip})</p>
-      <p><b>Project Type:</b> ${projectType}</p>
-      <p><b>Services:</b> ${services.join(", ")}</p>
-      <p><b>Timeline:</b> ${timeline}</p>
-      <p><b>How they heard:</b> ${howDidYouHear}</p>
-      <p><b>Preferred Contact:</b> ${contactMethod}</p>
-      <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-left: 4px solid #334155;">
-        <b>Message / Help Needed:</b><br />
-        ${helpWith}
-      </div>
-    </div>
-  `;
-
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
+    // Resend API Call
+    const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${env.RESEND_API_KEY}`,
@@ -84,15 +48,33 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       body: JSON.stringify({
         from: env.EMAIL_FROM_CONTACT,
         to: env.EMAIL_TO_CONTACT,
-        subject,
-        html,
-        text: `New Lead: ${fullName}\nEmail: ${email}\nMessage: ${helpWith}`
+        subject: `InfraQo Lead: ${fullName}`,
+        html: `
+          <div style="font-family:sans-serif;">
+            <h2>New Inquiry from ${fullName}</h2>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Phone:</b> ${phone}</p>
+            <p><b>Business:</b> ${businessName}</p>
+            <p><b>Location:</b> ${cityState} (${zip})</p>
+            <p><b>Services:</b> ${Array.isArray(services) ? services.join(", ") : services}</p>
+            <p><b>Timeline:</b> ${timeline}</p>
+            <hr/>
+            <p><b>Message:</b></p>
+            <div style="background:#f4f4f4;padding:10px;">${details}</div>
+          </div>
+        `,
+        text: `Lead: ${fullName}\nEmail: ${email}\nMessage: ${details}`
       })
     });
 
-    if (!res.ok) throw new Error(await res.text());
+    if (!resendResponse.ok) {
+      const errorMsg = await resendResponse.text();
+      return json({ ok: false, error: `Resend Error: ${errorMsg}` }, 500);
+    }
+
     return json({ ok: true });
+
   } catch (err: any) {
-    return json({ ok: false, error: err.message }, 500);
+    return json({ ok: false, error: `Worker Crash: ${err.message}` }, 500);
   }
 };
