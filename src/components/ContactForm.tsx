@@ -49,7 +49,7 @@ const ContactForm: React.FC = () => {
   const [submissionState, setSubmissionState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
-  
+
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
   const captchaContainerRef = useRef<HTMLDivElement>(null);
@@ -99,7 +99,7 @@ const ContactForm: React.FC = () => {
 
       if (!formData.firstName.trim()) newErrors.firstName = 'First name is required.';
       if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required.';
-      
+
       if (!formData.email.trim()) {
         newErrors.email = 'Email address is required.';
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -111,7 +111,7 @@ const ContactForm: React.FC = () => {
       } else if (!/^\d{10,}$/.test(formData.phone.replace(/\D/g, ''))) {
         newErrors.phone = 'Please enter a valid phone number (at least 10 digits).';
       }
-      
+
       if (!formData.location.trim()) newErrors.location = 'City/State is required.';
 
       if (!formData.zip.trim()) {
@@ -122,9 +122,9 @@ const ContactForm: React.FC = () => {
 
       if (formData.services.length === 0) newErrors.services = 'Please select at least one service area.';
       if (!formData.helpWith.trim()) newErrors.helpWith = 'Please describe what you need help with.';
-      
+
       if (!formData.agreeToTerms) newErrors.agreeToTerms = 'You must agree to be contacted.';
-      
+
       setErrors(newErrors);
       setAreFieldsValid(Object.keys(newErrors).length === 0);
     };
@@ -151,7 +151,7 @@ const ContactForm: React.FC = () => {
     const { name, value, type } = e.target;
     const isCheckbox = type === 'checkbox';
     const checked = isCheckbox ? (e.target as HTMLInputElement).checked : undefined;
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: isCheckbox ? checked : value,
@@ -165,7 +165,7 @@ const ContactForm: React.FC = () => {
   const handleProjectTypeChange = (type: 'Business' | 'Residential') => {
     setFormData(prev => ({ ...prev, projectType: type }));
   };
-  
+
   const handleServiceToggle = (service: string) => {
     setFormData(prev => {
       const newServices = prev.services.includes(service)
@@ -243,26 +243,26 @@ const ContactForm: React.FC = () => {
 
     console.log("Form Submitted:", payload);
 
-    fetch('https://formspree.io/f/mnnrrdre', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(payload),
+    fetch("/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({ ...payload, captchaToken }),
+  })
+    .then(async (response) => {
+      if (response.ok) {
+        setSubmissionState("success");
+        return;
+      }
+      console.error("Form submission error", await response.text());
+      setSubmissionState("error");
     })
-      .then(async (response) => {
-        if (response.ok) {
-          setSubmissionState('success');
-        } else {
-          console.error('Form submission error', await response.text());
-          setSubmissionState('error');
-        }
-      })
-      .catch((error) => {
-        console.error('Network error', error);
-        setSubmissionState('error');
-      });
+    .catch((error) => {
+      console.error("Network error", error);
+      setSubmissionState("error");
+    });
   };
 
   const inputClasses = "w-full bg-slate-50 border border-slate-300 text-slate-900 p-3 focus:border-blue-500 focus:bg-white focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 placeholder-slate-400";
@@ -306,9 +306,9 @@ const ContactForm: React.FC = () => {
             </span>
           </p>
         </div>
-        
+
         <form onSubmit={handleSubmit} noValidate className="max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-2xl border border-slate-100 relative z-10">
-          
+
           {submissionState === 'error' && (
             <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-8" role="alert">
               <strong className="font-bold">Error: </strong>
@@ -317,7 +317,7 @@ const ContactForm: React.FC = () => {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
-            
+
             <div>
               <label htmlFor="firstName" className={labelClasses}>First Name <span className="text-blue-600">*</span></label>
               <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses} placeholder="First name" />
@@ -420,7 +420,7 @@ const ContactForm: React.FC = () => {
                       {formData.services.length === 1 && formData.services[0]}
                       {formData.services.length > 1 && `${formData.services.length} services selected`}
                     </span>
-                    <svg className={`w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-2 ${isServicesDropdownOpen ? 'transform rotate-180 text-blue-500' : ''}`} 
+                    <svg className={`w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-2 ${isServicesDropdownOpen ? 'transform rotate-180 text-blue-500' : ''}`}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   {isServicesDropdownOpen && (
@@ -458,7 +458,7 @@ const ContactForm: React.FC = () => {
 
             <div className="md:col-span-2">
               <label htmlFor="helpWith" className={labelClasses}>Project Details <span className="text-blue-600">*</span></label>
-              <textarea id="helpWith" name="helpWith" rows={5} value={formData.helpWith} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses} 
+              <textarea id="helpWith" name="helpWith" rows={5} value={formData.helpWith} onChange={handleInputChange} onBlur={handleBlur} required className={inputClasses}
               placeholder="How can we help? Tell us a little about your project or issue."></textarea>
               {errors.helpWith && touched.helpWith && <p className="text-red-600 text-xs mt-1 flex items-center"><span className="mr-1">⚠</span> {errors.helpWith}</p>}
             </div>
@@ -502,7 +502,7 @@ const ContactForm: React.FC = () => {
                 </label>
             </div>
           </div>
-          
+
             <div className="w-full mt-10 mb-6 pt-6 border-t border-slate-100">
               <label className={labelClasses}>
                 Security Verification <span className="text-blue-600">*</span>
@@ -518,10 +518,10 @@ const ContactForm: React.FC = () => {
             </div>
 
           <div className="mt-10 text-center">
-            <button 
-              type="submit" 
-              disabled={!areFieldsValid || submissionState === 'submitting'} 
-              className="w-full md:w-auto bg-slate-900 text-white font-bold uppercase tracking-widest py-4 px-12 transition-all duration-300 
+            <button
+              type="submit"
+              disabled={!areFieldsValid || submissionState === 'submitting'}
+              className="w-full md:w-auto bg-slate-900 text-white font-bold uppercase tracking-widest py-4 px-12 transition-all duration-300
               shadow-lg hover:shadow-blue-500/20 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-900"
             >
               {submissionState === 'submitting' ? 'Sending...' : 'Send Request'}
