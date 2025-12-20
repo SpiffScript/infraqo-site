@@ -1,21 +1,19 @@
 // functions/api/contact.ts
 
-import type {
-  PagesFunction,
-  Response as CFResponse,
-} from "@cloudflare/workers-types";
+import type { PagesFunction, Response as CFResponse } from "@cloudflare/workers-types";
 
 export interface Env {
   RECAPTCHA_SECRET: string;
 
+  // Resend API key (create one dedicated for Contact if you want)
   RESEND_API_KEY: string;
 
-  // Set this to: support@infraqo.com
-  // Must be a verified sender/domain in Resend.
-  EMAIL_FROM: string;
+  // Contact form sender (you want support@infraqo.com)
+  // Must be an allowed "From" in Resend (verified domain / sender).
+  EMAIL_FROM_CONTACT: string;
 
-  // Where you want contact leads delivered (can be support@infraqo.com or your personal inbox)
-  EMAIL_TO: string;
+  // Where to deliver contact leads
+  EMAIL_TO_CONTACT: string;
 }
 
 function json(data: unknown, status = 200): CFResponse {
@@ -54,7 +52,7 @@ async function verifyRecaptchaV2(opts: {
   token: string;
   secret: string;
   remoteip?: string;
-}): Promise<{ ok: boolean; score?: number; hostname?: string; errorCodes?: string[] }> {
+}): Promise<{ ok: boolean; hostname?: string; errorCodes?: string[] }> {
   const body = new URLSearchParams();
   body.set("secret", opts.secret);
   body.set("response", opts.token);
@@ -70,7 +68,6 @@ async function verifyRecaptchaV2(opts: {
 
   return {
     ok: Boolean(data?.success),
-    score: typeof data?.score === "number" ? data.score : undefined,
     hostname: safe(data?.hostname),
     errorCodes: Array.isArray(data?.["error-codes"]) ? data["error-codes"] : undefined,
   };
@@ -119,7 +116,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, error: "Invalid JSON" }, 400);
   }
 
-  // Must match ContactForm.tsx (you’re posting captchaToken)
+  // Must match ContactForm.tsx (captchaToken)
   const captchaToken = safe(payload?.captchaToken);
   if (!captchaToken) {
     return json({ ok: false, error: "Missing captcha token" }, 400);
@@ -147,42 +144,45 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
-  // --------- Match ContactForm.tsx payload shape (nested objects) ----------
+  // --------- Match ContactForm.tsx nested payload ----------
+
   const firstName = safe(payload?.customer?.firstName);
   const lastName = safe(payload?.customer?.lastName);
   const fullName = safe(`${firstName} ${lastName}`.trim());
 
   const email = safe(payload?.contact?.email);
   const phone = safe(payload?.contact?.phone);
-
   const preferredContact = safe(payload?.contact?.preferredContact);
 
-  const projectType = safe(payload?.project?.projectType); // "Business" | "Residential"
   const businessName = safe(payload?.company?.businessName);
 
   const city = safe(payload?.location?.city);
   const state = safe(payload?.location?.state);
   const zip = safe(payload?.location?.zip);
-
   const numLocations = safe(payload?.location?.numLocations);
 
-  // services: { serviceAreas: string[] }
-  const servicesRequested = safeArray(payload?.services?.serviceAreas);
-
+  const projectType = safe(payload?.project?.projectType);
   const details = safe(payload?.project?.details);
   const timeline = safe(payload?.project?.timeline);
   const heardFrom = safe(payload?.project?.heardFrom);
 
+  const servicesRequested = safeArray(payload?.services?.serviceAreas);
+
   const agreeToTerms = payload?.meta?.agreeToTerms ? "Yes" : "No";
   const sendUpdates = payload?.meta?.sendUpdates ? "Yes" : "No";
 
-  // Subject: keep it human + never allow [object Object]
+  // Subject: keep it human; never allow objects to leak in
   const subjectParts = [
     "InfraQo Contact Request",
-    fullName || email || phone ? `(${[fullName, email, phone].filter(Boolean).join(" | ")})` : "",
+    fullName || email || phone
+      ? `(${[fullName, email, phone].filter(Boolean).join(" | ")})`
+      : "",
   ].filter(Boolean);
 
   const subject = subjectParts.join(" ");
+
+  const locationLine =
+    [city, state, zip].filter(Boolean).join(", ") || "(not provided)";
 
   const text = [
     "New Contact Request (InfraQo)",
@@ -190,10 +190,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     `Name: ${fullName || "(not provided)"}`,
     `Email: ${email || "(not provided)"}`,
     `Phone: ${phone || "(not provided)"}`,
+    `Company: ${businessName || "(not provided)"}`,
     `Preferred Contact: ${preferredContact || "(not provided)"}`,
     `Project Type: ${projectType || "(not provided)"}`,
-    `Business Name: ${businessName || "(not provided)"}`,
-    `Location: ${[city, state, zip].filter(Boolean).join(", ") || "(not provided)"}`,
+    `Location: ${locationLine}`,
     `# Locations: ${numLocations || "(not provided)"}`,
     `Services: ${servicesRequested.length ? servicesRequested.join(", ") : "(not provided)"}`,
     `Timeline: ${timeline || "(not provided)"}`,
@@ -208,42 +208,95 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const html = `
     <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:#111827;">
-      <h2 style="margin:0 0 10px 0;">New Contact Request (InfraQo)</h2>
+      <h2 style="margin:0 0 12px 0;">New Contact Request (InfraQo)</h2>
 
-      <table style="border-collapse: collapse; width: 100%; max-width: 720px;">
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Name</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(fullName) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Email</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(email) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Phone</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(phone) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Preferred Contact</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(preferredContact) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Project Type</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(projectType) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Business Name</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(businessName) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Location</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml([city, state, zip].filter(Boolean).join(", ")) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b># Locations</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(numLocations) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Services</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(servicesRequested.join(", ")) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Timeline</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(timeline) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Heard From</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(heardFrom) || "(not provided)"}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Agree to be contacted</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(agreeToTerms)}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Send updates</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(sendUpdates)}</td></tr>
-        <tr><td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>IP</b></td><td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(ip || "") || "(unknown)"}</td></tr>
+      <table style="border-collapse: collapse; width: 100%; max-width: 760px;">
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Name</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(fullName) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Email</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(email) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Phone</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(phone) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Company</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(businessName) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Preferred Contact</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(preferredContact) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Project Type</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(projectType) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Location</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(locationLine) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b># Locations</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(numLocations) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Services</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${
+            servicesRequested.length ? escapeHtml(servicesRequested.join(", ")) : "(not provided)"
+          }</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Timeline</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(timeline) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Heard From</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(heardFrom) || "(not provided)"}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Agree to be contacted</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(agreeToTerms)}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>Send updates</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(sendUpdates)}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;"><b>IP</b></td>
+          <td style="padding:6px 10px; border:1px solid #e5e7eb;">${escapeHtml(safe(ip)) || "(unknown)"}</td>
+        </tr>
       </table>
 
-      <h3 style="margin:16px 0 8px 0;">Project Details</h3>
-      <div style="white-space: pre-wrap; padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; max-width: 720px;">
+      <h3 style="margin:16px 0 6px 0;">Project Details</h3>
+      <div style="white-space:pre-wrap; border:1px solid #e5e7eb; padding:10px; max-width:760px;">
         ${escapeHtml(details) || "(not provided)"}
       </div>
     </div>
-  `;
+  `.trim();
 
-  // IMPORTANT: this is the “from support@infraqo.com” behavior
-  // You set EMAIL_FROM to support@infraqo.com in CF env vars
-  await sendViaResend({
-    apiKey: env.RESEND_API_KEY,
-    from: env.EMAIL_FROM,
-    to: env.EMAIL_TO,
-    subject,
-    text,
-    html,
-  });
+  try {
+    await sendViaResend({
+      apiKey: env.RESEND_API_KEY,
+      from: env.EMAIL_FROM_CONTACT,
+      to: env.EMAIL_TO_CONTACT,
+      subject,
+      text,
+      html,
+    });
+  } catch (err: any) {
+    return json(
+      {
+        ok: false,
+        error: "Email send failed",
+        details: safe(err?.message) || "Unknown error",
+      },
+      500
+    );
+  }
 
   return json({ ok: true });
 };

@@ -9,7 +9,6 @@ type CandidateRecord = {
   id: string;
   timestamp: string;
   resumeKey: string | null;
-  // other fields may exist, but we only care about resumeKey here
 };
 
 export const onRequestGet = async (
@@ -42,7 +41,6 @@ export const onRequestGet = async (
       return new Response("Resume object not found", { status: 404 });
     }
 
-    // Read the object into an ArrayBuffer so TS is happy about the body type
     const body = await object.arrayBuffer();
 
     const filename =

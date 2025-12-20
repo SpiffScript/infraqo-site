@@ -4,8 +4,6 @@ export interface Env {
   CAREERS_KV: KVNamespace;
   CAREERS_BUCKET: R2Bucket;
 
-
-  // Email provider secrets - Resend
   EMAIL_API_KEY: string;
   EMAIL_FROM: string;
   EMAIL_TO: string;
@@ -85,10 +83,8 @@ export const onRequestPost = async (
       resumeKey,
     };
 
-    // 1) Store metadata in KV
     await env.CAREERS_KV.put(`candidate:${id}`, JSON.stringify(record));
 
-    // 2) Store resume in R2
 if (resume && resumeKey) {
   const contents = await resume.arrayBuffer();
 
@@ -99,7 +95,6 @@ if (resume && resumeKey) {
   });
 }
 
-    // 3) Send email notification (fire-and-forget)
     const origin = new URL(request.url).origin;
     const downloadUrl =
       resumeKey != null
@@ -124,10 +119,6 @@ function jsonResponse(body: unknown, status = 200): Response {
   });
 }
 
-// --- email helper --------------------------------------------------
-
-// This example assumes something like Resend.
-// You can swap the URL/body shape if you use Mailgun/SendGrid instead.
 async function sendNotificationEmail(
   env: Env,
   record: CandidateRecord,

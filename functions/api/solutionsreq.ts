@@ -34,7 +34,6 @@ const json = (await request.json().catch(() => ({}))) as Body;
     const page = String(json?.page || "SolutionsQo").trim();
     const submittedAt = String(json?.submittedAt || "").trim();
 
-    // Minimum validation: name + (email OR phone)
     if (!fullName || (!email && !phone)) {
       return new Response(
         JSON.stringify({ error: "Please provide your name and either an email or phone number." }),
