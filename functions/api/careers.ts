@@ -5,8 +5,8 @@ export interface Env {
   CAREERS_BUCKET: R2Bucket;
 
   RESEND_API_KEY: string;
-  EMAIL_FROM: string;
-  EMAIL_TO: string;
+  EMAIL_FROM_CAREERS: string;
+  EMAIL_TO_CAREERS: string;
 }
 
 type CandidateRecord = {
@@ -317,8 +317,8 @@ async function sendNotificationEmail(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: env.EMAIL_FROM,
-      to: env.EMAIL_TO,
+      from: env.EMAIL_FROM_CAREERS,
+      to: env.EMAIL_TO_CAREERS,
       subject,
       text,
       html: htmlBody,
