@@ -1,8 +1,5 @@
 // functions/api/contact.ts
-import type {
-  PagesFunction,
-  Response as CFResponse,
-} from "@cloudflare/workers-types";
+import type { PagesFunction, Response as CFResponse } from "@cloudflare/workers-types";
 
 export interface Env {
   RECAPTCHA_SECRET: string;
@@ -19,32 +16,46 @@ const json = (data: any, status = 200) =>
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   try {
-    const body = await request.json();
+    const payload = (await request.json()) as any;
 
-    const {
-      name,
-      email,
-      phone,
-      business,
-      location,
-      services,
-      timeline,
-      message,
-      recaptchaToken, // IMPORTANT: make sure your frontend sends this
-    } = body as {
-      name?: string;
-      email?: string;
-      phone?: string;
-      business?: string;
-      location?: string;
-      services?: string;
-      timeline?: string;
-      message?: string;
-      recaptchaToken?: string;
-    };
+    // ----- Map nested ContactForm payload to flat fields -----
+    const firstName: string = (payload.customer?.firstName ?? "").toString().trim();
+    const lastName: string = (payload.customer?.lastName ?? "").toString().trim();
+    const name: string = [firstName, lastName].filter(Boolean).join(" ");
 
-    // ---- Basic validation (lightweight, not user-facing copy) ----
-    if (!email || !message) {
+    const email: string = (payload.contact?.email ?? "").toString().trim();
+    const phone: string = (payload.contact?.phone ?? "").toString().trim();
+    const preferredContactMethod: string = (payload.contact?.preferredMethod ?? "").toString().trim();
+
+    const business: string = (payload.company?.businessName ?? "").toString().trim();
+
+    const cityState: string = (payload.location?.cityState ?? "").toString().trim();
+    const zip: string = (payload.location?.zip ?? "").toString().trim();
+    const numLocations: string = (payload.location?.numLocations ?? "").toString().trim();
+    const serviceLocation: string =
+      cityState && zip ? `${cityState} (${zip})` : cityState || zip || "";
+
+    const servicesRequested = payload.services?.requested;
+    let services: string;
+    if (Array.isArray(servicesRequested)) {
+      services = servicesRequested.join(", ");
+    } else if (typeof servicesRequested === "string") {
+      services = servicesRequested;
+    } else {
+      services = "";
+    }
+
+    const projectDetails: string = (payload.project?.details ?? "").toString();
+    const timeline: string = (payload.project?.timeline ?? "").toString().trim();
+    const heardFrom: string = (payload.project?.heardFrom ?? "").toString().trim();
+
+    const sendUpdates: boolean = !!payload.meta?.sendUpdates;
+    const agreeToTerms: boolean = !!payload.meta?.agreeToTerms;
+
+    const recaptchaToken: string = (payload.captchaToken ?? "").toString().trim();
+
+    // ----- Basic validation -----
+    if (!email || !projectDetails) {
       return json(
         { ok: false, error: "Missing required fields: email and message" },
         400
@@ -58,7 +69,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       );
     }
 
-    // ---- Verify reCAPTCHA with Google ----
+    // ----- Verify reCAPTCHA -----
     const verifyRes = await fetch(
       "https://www.google.com/recaptcha/api/siteverify",
       {
@@ -66,42 +77,49 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         body: new URLSearchParams({
           secret: env.RECAPTCHA_SECRET,
           response: recaptchaToken,
-          // optional: include client IP if you want stricter checks
-          // remoteip: request.headers.get("CF-Connecting-IP") ?? "",
         }),
       }
     );
 
-    const verifyData = (await verifyRes.json()) as {
-      success: boolean;
-      // score?: number; // v3
-      // action?: string;
-      // "error-codes"?: string[];
-    };
+    const verifyData = (await verifyRes.json()) as { success: boolean };
 
     if (!verifyData.success) {
-      // If Google says "nope", do NOT send the email.
       return json(
         { ok: false, error: "recaptcha_failed" },
         400
       );
     }
 
-    // ---- Build InfraQo-branded email content ----
-    const safe = (v?: string) => (v && String(v).trim().length > 0 ? v : "—");
+    // ----- Build InfraQo-branded email -----
+    const safe = (value: any): string => {
+      const s =
+        typeof value === "string"
+          ? value.trim()
+          : value?.toString?.().trim?.() ?? "";
+      return s.length > 0 ? s : "—";
+    };
+
+    const safeBool = (value: boolean): string => (value ? "Yes" : "No");
 
     const subjectName = safe(name);
-    const subject = `InfraQo Lead: ${subjectName}`;
+    const subject = `New Request from ${subjectName}`;
 
     const textBody =
       `New Inquiry from ${subjectName}\n\n` +
+      `Name: ${safe(name)}\n` +
       `Email: ${safe(email)}\n` +
       `Phone: ${safe(phone)}\n` +
       `Business: ${safe(business)}\n` +
-      `Location: ${safe(location)}\n` +
-      `Services: ${safe(services)}\n` +
-      `Timeline: ${safe(timeline)}\n\n` +
-      `Message:\n${safe(message)}\n`;
+      `Service Location: ${safe(serviceLocation)}\n` +
+      `Number of Locations: ${safe(numLocations)}\n` +
+      `Preferred Contact Method: ${safe(preferredContactMethod)}\n` +
+      `Project Type: ${safe(payload.customer?.projectType)}\n` +
+      `Services Needed: ${safe(services)}\n` +
+      `Project Timeline: ${safe(timeline)}\n` +
+      `How did you hear about us?: ${safe(heardFrom)}\n` +
+      `Send Updates: ${safeBool(sendUpdates)}\n` +
+      `Agreed to Terms: ${safeBool(agreeToTerms)}\n\n` +
+      `Message:\n${safe(projectDetails)}\n`;
 
     const htmlBody = `
       <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#0b1020; padding:24px;">
@@ -115,13 +133,16 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
           <table style="width:100%; border-collapse:collapse; font-size:14px; color:#111827;">
             <tr>
-              <td style="padding:6px 0; font-weight:600; width:120px;">Name:</td>
+              <td style="padding:6px 0; font-weight:600; width:170px;">Name:</td>
               <td style="padding:6px 0;">${safe(name)}</td>
             </tr>
-              <td style="padding:6px 0; font-weight:600; width:120px;">Email:</td>
-              <td style="padding:6px 0;"><a href="mailto:${safe(
-                email
-              )}" style="color:#2563eb; text-decoration:none;">${safe(email)}</a></td>
+            <tr>
+              <td style="padding:6px 0; font-weight:600; width:170px;">Email:</td>
+              <td style="padding:6px 0;">
+                <a href="mailto:${safe(email)}" style="color:#2563eb; text-decoration:none;">
+                  ${safe(email)}
+                </a>
+              </td>
             </tr>
             <tr>
               <td style="padding:6px 0; font-weight:600;">Phone:</td>
@@ -132,16 +153,40 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
               <td style="padding:6px 0;">${safe(business)}</td>
             </tr>
             <tr>
-              <td style="padding:6px 0; font-weight:600;">Location:</td>
-              <td style="padding:6px 0;">${safe(location)}</td>
+              <td style="padding:6px 0; font-weight:600;">Service Location:</td>
+              <td style="padding:6px 0;">${safe(serviceLocation)}</td>
             </tr>
             <tr>
-              <td style="padding:6px 0; font-weight:600;">Services:</td>
+              <td style="padding:6px 0; font-weight:600;">Number of Locations:</td>
+              <td style="padding:6px 0;">${safe(numLocations)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0; font-weight:600;">Preferred Contact Method:</td>
+              <td style="padding:6px 0;">${safe(preferredContactMethod)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0; font-weight:600;">Project Type:</td>
+              <td style="padding:6px 0;">${safe(payload.customer?.projectType)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0; font-weight:600;">Services Needed:</td>
               <td style="padding:6px 0;">${safe(services)}</td>
             </tr>
             <tr>
-              <td style="padding:6px 0; font-weight:600;">Timeline:</td>
+              <td style="padding:6px 0; font-weight:600;">Project Timeline:</td>
               <td style="padding:6px 0;">${safe(timeline)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0; font-weight:600;">How did you hear about us?</td>
+              <td style="padding:6px 0;">${safe(heardFrom)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0; font-weight:600;">Send Updates:</td>
+              <td style="padding:6px 0;">${safeBool(sendUpdates)}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0; font-weight:600;">Agreed to Terms:</td>
+              <td style="padding:6px 0;">${safeBool(agreeToTerms)}</td>
             </tr>
           </table>
 
@@ -151,7 +196,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
             Message:
           </p>
           <p style="margin:0; font-size:14px; color:#374151; white-space:pre-wrap; line-height:1.5;">
-            ${safe(message)}
+            ${safe(projectDetails)}
           </p>
 
           <hr style="margin:24px 0 18px; border:none; border-top:1px solid #e5e7eb;" />
@@ -163,7 +208,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       </div>
     `;
 
-    // ---- Send email via Resend ----
+    // ----- Send email via Resend -----
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
