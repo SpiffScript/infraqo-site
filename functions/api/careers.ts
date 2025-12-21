@@ -136,20 +136,51 @@ async function sendNotificationEmail(
     availability,
   } = record;
 
-  const subject = `New InfraQo careers interest: ${firstName} ${lastName}`;
+  const fullName = `${firstName} ${lastName}`.trim() || "Unknown candidate";
 
+  // ---- Helpers ----
+  const safe = (value: any): string => {
+    if (value === null || value === undefined) return "";
+    const str = typeof value === "string" ? value : String(value);
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  };
+
+  const safeBool = (value: string | null | undefined): string | null => {
+    if (!value) return null;
+    return value;
+  };
+
+  // ---- Subject ----
+  const subject = `Candidate Submission – ${fullName}`;
+
+  // ---- Plain text version ----
   const lines = [
-    `Name: ${firstName} ${lastName}`,
+    `Name: ${fullName}`,
     `Email: ${email}`,
     record.phone ? `Phone: ${record.phone}` : null,
     `Role: ${role}`,
     location ? `Location: ${location}` : null,
-    currentEmployer ? `Current/most recent employer: ${currentEmployer}` : null,
-    employmentStatus ? `Currently employed: ${employmentStatus}` : null,
-    workAuthorization ? `Work authorization: ${workAuthorization}` : null,
+    currentEmployer
+      ? `Current/most recent employer: ${currentEmployer}`
+      : null,
+    employmentStatus
+      ? `Currently employed: ${employmentStatus}`
+      : null,
+    workAuthorization
+      ? `Work authorization: ${workAuthorization}`
+      : null,
     availability ? `Availability: ${availability}` : null,
-    record.howHeard ? `How they heard about InfraQo: ${record.howHeard}` : null,
-    record.portfolioUrl ? `Portfolio/LinkedIn: ${record.portfolioUrl}` : null,
+    record.howHeard
+      ? `How they heard about InfraQo: ${record.howHeard}`
+      : null,
+    record.portfolioUrl
+      ? `Portfolio/LinkedIn: ${record.portfolioUrl}`
+      : null,
     "",
     record.message ? `Summary:\n${record.message}` : null,
     "",
@@ -158,6 +189,127 @@ async function sendNotificationEmail(
 
   const text = lines.join("\n");
 
+  // ---- HTML version ----
+  const htmlBody = `
+  <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#0b1020; padding:24px;">
+    <div style="max-width:640px; margin:0 auto; background:#ffffff; border-radius:12px; padding:24px 24px 28px; box-shadow:0 10px 30px rgba(15,23,42,0.25);">
+      <h1 style="margin:0 0 12px; font-size:20px; color:#111827;">
+        New InfraQo Careers interest from ${safe(fullName)}
+      </h1>
+      <p style="margin:0 0 16px; font-size:14px; color:#4b5563;">
+        A new careers interest was submitted through the InfraQo website.
+      </p>
+
+      <table style="width:100%; border-collapse:collapse; font-size:14px; color:#111827;">
+        <tr>
+          <td style="padding:6px 0; font-weight:600; width:160px;">Name:</td>
+          <td style="padding:6px 0;">${safe(fullName)}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0; font-weight:600;">Email:</td>
+          <td style="padding:6px 0;">
+            <a href="mailto:${safe(email)}" style="color:#2563eb; text-decoration:none;">
+              ${safe(email)}
+            </a>
+          </td>
+        </tr>
+        ${
+          record.phone
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Phone:</td>
+                 <td style="padding:6px 0;">${safe(record.phone)}</td>
+               </tr>`
+            : ""
+        }
+        <tr>
+          <td style="padding:6px 0; font-weight:600;">Role:</td>
+          <td style="padding:6px 0;">${safe(role)}</td>
+        </tr>
+        ${
+          location
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Location:</td>
+                 <td style="padding:6px 0;">${safe(location)}</td>
+               </tr>`
+            : ""
+        }
+        ${
+          currentEmployer
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Current employer:</td>
+                 <td style="padding:6px 0;">${safe(currentEmployer)}</td>
+               </tr>`
+            : ""
+        }
+        ${
+          safeBool(employmentStatus)
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Employment status:</td>
+                 <td style="padding:6px 0;">${safe(employmentStatus)}</td>
+               </tr>`
+            : ""
+        }
+        ${
+          safeBool(workAuthorization)
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Work authorization:</td>
+                 <td style="padding:6px 0;">${safe(workAuthorization)}</td>
+               </tr>`
+            : ""
+        }
+        ${
+          availability
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Availability:</td>
+                 <td style="padding:6px 0;">${safe(availability)}</td>
+               </tr>`
+            : ""
+        }
+        ${
+          record.howHeard
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">How they heard about InfraQo:</td>
+                 <td style="padding:6px 0;">${safe(record.howHeard)}</td>
+               </tr>`
+            : ""
+        }
+        ${
+          record.portfolioUrl
+            ? `<tr>
+                 <td style="padding:6px 0; font-weight:600;">Portfolio / LinkedIn:</td>
+                 <td style="padding:6px 0;">
+                   <a href="${safe(record.portfolioUrl)}" style="color:#2563eb; text-decoration:none;">
+                     ${safe(record.portfolioUrl)}
+                   </a>
+                 </td>
+               </tr>`
+            : ""
+        }
+      </table>
+
+      <p style="margin:18px 0 4px; font-size:14px; color:#4b5563;"><strong>Summary</strong></p>
+      <div style="padding:10px; background:#f3f4f6; border-radius:8px; font-size:14px; color:#111827; white-space:pre-wrap;">
+        ${safe(record.message || "No summary provided.")}
+      </div>
+
+      <p style="margin:16px 0 0; font-size:14px; color:#111827;">
+        <strong>Resume:</strong>
+        ${
+          downloadUrl
+            ? `<a href="${safe(downloadUrl)}" style="color:#2563eb; text-decoration:none;">Download resume</a>`
+            : "No resume uploaded."
+        }
+      </p>
+
+      <hr style="margin:20px 0; border:none; border-top:1px solid #e5e7eb;" />
+      <p style="margin:0; font-size:12px; color:#9ca3af;">
+        InfraQo • Your Partner in Operational Excellence
+      </p>
+    </div>
+  </div>
+  `;
+
+  // ---- Send via Resend ----
   await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -169,6 +321,7 @@ async function sendNotificationEmail(
       to: env.EMAIL_TO,
       subject,
       text,
+      html: htmlBody,
     }),
   });
 }
