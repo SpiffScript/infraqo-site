@@ -309,8 +309,8 @@ async function sendNotificationEmail(
   </div>
   `;
 
-  // ---- Send via Resend ----
-  await fetch("https://api.resend.com/emails", {
+    // ---- Send via Resend ----
+  const resendRes = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -324,4 +324,25 @@ async function sendNotificationEmail(
       html: htmlBody,
     }),
   });
+
+  let resendData: any = null;
+  try {
+    resendData = await resendRes.json();
+  } catch {
+    // Resend may return an empty body on success; ignore JSON parse errors
+  }
+
+  if (!resendRes.ok) {
+    console.error("Resend careers email failed", resendRes.status, resendData);
+    throw new Error(
+      resendData?.error?.message ||
+        `Resend careers email failed with status ${resendRes.status}`,
+    );
+  }
+
+  console.log(
+    "Resend careers email sent",
+    resendRes.status,
+    resendData?.id ?? "",
+  );
 }
