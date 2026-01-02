@@ -8,7 +8,7 @@ import { LinkedInIcon } from "./icons/LinkedInIcon";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-900 text-slate-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
           <div className="text-center md:text-left flex flex-col items-center md:items-start">
             <Link to="/" aria-label="Go to InfraQo home">
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
               />
             </Link>
             <p className="text-sm text-slate-400">
-              Your Partner In Operational Excellence.
+              The Architecture of Continuity.
             </p>
           </div>
 
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
                 <LinkedInIcon />
               </a>
               <a
-                href="https://facebook.com/InfraQo"
+                href="https://facebook.com/infraqo"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit InfraQo on Facebook"
@@ -89,10 +89,10 @@ const Footer: React.FC = () => {
                 <FacebookIcon />
               </a>
               <a
-                href="https://x.com/InfraQo"
+                href="https://x.com/infraqo"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Follow InfraQo on X (Twitter)"
+                aria-label="Follow InfraQo on X"
                 className="text-white hover:text-blue-400 transition-colors transform transition-transform duration-150 ease-out hover:scale-110"
               >
                 <XIcon />
@@ -103,8 +103,23 @@ const Footer: React.FC = () => {
 
         <div className="mt-10 h-px bg-slate-800" />
 
+          <div className="absolute left-6 bottom-12 translate-x-2 text-xs text-slate-400 leading-tight hidden md:block">
+            <p>Infrastructure provides resilience.</p>
+          <p>Leadership provides direction.</p>
+          <p className="mt-1">
+            <a
+              href="https://signalqo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400 transition-colors"
+            >
+              SignalQo
+            </a>
+          </p>
+        </div>
+
         <div className="mt-6 text-center text-xs text-slate-500 space-y-2">
-          <p>
+          <p className="text-slate-300">
             <a
               href="tel:17205154843"
               className="hover:text-blue-400 transition-colors"
@@ -119,20 +134,20 @@ const Footer: React.FC = () => {
               support@infraqo.com
             </a>
           </p>
-          <p>
-            Serving Denver, Colorado Springs, the Front Range, and Eastern
-            Colorado.
+
+          <p className="text-slate-300">
+            Serving Denver, Colorado Springs, the Front Range, and Eastern Colorado.
           </p>
 
           <p className="space-x-3">
             <Link to="/privacy" className="hover:text-blue-400 transition-colors">
               Privacy Policy
             </Link>
-            <span className="text-slate-600">•</span>
+            <span className="text-slate-600">·</span>
             <Link to="/terms" className="hover:text-blue-400 transition-colors">
               Terms of Service
             </Link>
-            <span className="text-slate-600">•</span>
+            <span className="text-slate-600">·</span>
             <Link
               to="/acceptable-use"
               className="hover:text-blue-400 transition-colors"
@@ -140,9 +155,8 @@ const Footer: React.FC = () => {
               Acceptable Use Policy
             </Link>
           </p>
-          <p>
-            &copy; {new Date().getFullYear()} InfraQo, LLC. All Rights Reserved.
-          </p>
+
+          <p>© {new Date().getFullYear()} QoLogic, LLC. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

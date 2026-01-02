@@ -33,10 +33,11 @@ const Privacy: React.FC = () => {
 
         <div className="space-y-6 text-sm leading-relaxed text-slate-800">
           <p>
-            InfraQo, and its affiliates, subsidiaries, and agents (“InfraQo,”
-            “we,” “us,” or “our”) operates the infraqo.com website and provides
-            related structured cabling, network infrastructure, IT support, and
-            managed services (collectively, the “Services”).
+            InfraQo is a brand and operating division of QoLogic LLC, and together
+            with its affiliates, subsidiaries, and agents (“InfraQo,” “we,” “us,”
+            or “our”), operates the infraqo.com website and provides related structured
+            cabling, network infrastructure, IT support, and managed services
+            (collectively, the “Services”).
           </p>
           <p>
             This Privacy Policy informs you of our policies regarding the
@@ -89,10 +90,11 @@ const Privacy: React.FC = () => {
           <p>
             <span className="font-semibold">“Data Controller”</span> means the
             person or entity that determines the purposes for which and the
-            manner in which Personal Data is processed. For purposes of this
-            Privacy Policy, InfraQo is the Data Controller of the Personal Data
-            we collect through the Site or in connection with the Services,
-            except where otherwise noted in a separate written agreement.
+            manner in which Personal Data is processed. For purposes of this Privacy
+            Policy, QoLogic LLC, operating through its InfraQo brand, is the Data
+            Controller of the Personal Data we collect through the Site or in
+            connection with the Services, except where otherwise noted in a separate
+            written agreement.
           </p>
           <p>
             <span className="font-semibold">“Data Processor”</span> or{" "}
@@ -206,6 +208,11 @@ const Privacy: React.FC = () => {
               Asset inventories, serial numbers, and deployment details
             </li>
           </ul>
+          <p>
+            Any such access information is used solely for authorized service delivery,
+            limited to personnel with a legitimate need to know, and handled in accordance
+            with applicable confidentiality and security obligations.
+          </p>
           <p>
             This information is used strictly for the purposes of delivering,
             maintaining, securing, and improving the Services you have
@@ -367,8 +374,8 @@ const Privacy: React.FC = () => {
           </h2>
           <p>
             The Site and Services are intended for business users and are not
-            directed to children under 16. We do not knowingly collect Personal
-            Data from anyone under 16. If you believe we have collected such
+            directed to children under 18. We do not knowingly collect Personal
+            Data from anyone under 18. If you believe we have collected such
             information, please contact us so we can take appropriate steps to
             delete it.
           </p>

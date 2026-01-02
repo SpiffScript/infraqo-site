@@ -17,8 +17,9 @@ const AcceptableUse: React.FC = () => {
             This Acceptable Use Policy (&quot;AUP&quot;) describes guidelines
             and restrictions for the use of networks, systems, cabling,
             equipment, and related services designed, installed, configured, or
-            supported by InfraQo, LLC (&quot;InfraQo,&quot; &quot;we,&quot;
-            &quot;us,&quot; or &quot;our&quot;).
+            supported by InfraQo, a brand and operating division of QoLogic LLC
+            (&quot;InfraQo,&quot; &quot;we,&quot; &quot;us,&quot; or
+            &quot;our&quot;).
           </p>
           <p>
             This AUP is intended to protect the reliability, security, and

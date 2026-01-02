@@ -15,9 +15,10 @@ const Terms: React.FC = () => {
           <p>
             These Terms of Service (&quot;Terms&quot;) govern your access to and
             use of the infraqo.com website (the &quot;Site&quot;) and any
-            related services offered through the Site by InfraQo, and its
-            affiliates, subsidiaries, and agents (&quot;InfraQo,&quot;
-            &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
+            related services services offered through the Site by InfraQo, a brand
+            and operating division of QoLogic LLC, and its affiliates, subsidiaries,
+            and agents (&quot;InfraQo,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;
+            our&quot;).
           </p>
           <p>
             By accessing or using the Site, submitting information through the
@@ -149,9 +150,9 @@ const Terms: React.FC = () => {
             The Site and its entire contents, features, and functionality,
             including without limitation text, graphics, logos, icons, images,
             audio, video, software, and the design and arrangement thereof, are
-            owned by InfraQo or its licensors and are protected by U.S. and
-            international copyright, trademark, and other intellectual property
-            laws.
+            owned by InfraQo (operating through QoLogic LLC) or its licensors and
+            are protected by U.S. and international copyright, trademark, and other
+            intellectual property laws.
           </p>
 
           <p className="mt-4">
@@ -163,7 +164,7 @@ const Terms: React.FC = () => {
           </p>
 
           <p>
-            Any appearance of these marks is for identification, informational, or 
+            Any appearance of these marks is for identification, informational, or
             descriptive purposes only to illustrate the types of equipment, technologies,
             or solutions commonly used by InfraQo in the course of providing services.
           </p>
@@ -371,18 +372,23 @@ const Terms: React.FC = () => {
             liability, and indemnification obligations) shall survive.
           </p>
 
-          <h2 className="text-xl font-semibold mt-10">13. Governing Law</h2>
-          <p>
-            These Terms and any dispute arising out of or relating to them or
-            your use of the Site shall be governed by and construed in accordance
-            with the laws of the State of Colorado, without regard to its
-            conflict of law principles.
+          <h2 className="text-xl font-semibold mt-10">13. Arbitration; Class Action Waiver; Governing Law</h2>
+          <p className="font-semibold">
+            PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS.
           </p>
           <p>
-            You agree that the state and federal courts located in Colorado
-            shall have exclusive jurisdiction over any claim or dispute arising
-            out of or relating to these Terms or your use of the Site, and you
-            hereby consent to the personal jurisdiction and venue of such courts.
+            Any dispute arising out of or relating to these Terms or the Site
+            shall be resolved by binding arbitration administered by the
+            American Arbitration Association (AAA) under its Commercial
+            Arbitration Rules. Arbitration will be conducted by a single
+            arbitrator and may take place remotely or in Colorado, at InfraQo’s
+            election.
+          </p>
+          <p>
+            These Terms are governed by the laws of the State of Colorado. You
+            waive any right to participate in a class action or representative
+            proceeding. Small claims actions and injunctive relief to protect
+            intellectual property are excluded.
           </p>
 
           <h2 className="text-xl font-semibold mt-10">
