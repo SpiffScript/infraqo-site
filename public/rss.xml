@@ -2,7 +2,7 @@
 <rss version="2.0">
   <channel>
     <title>InfraQo Insights</title>
-    <link>https://infraqo.com/blog</link>
+    <link>https://www.infraqo.com/blog</link>
     <description>Stories and lessons from real-world infrastructure operations, written by Justin Burch at InfraQo.</description>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Dec 2025 00:00:00 -0700</lastBuildDate>
@@ -11,11 +11,11 @@
 
     <item>
       <title>The Day Everything Went Dark — and Why Infrastructure Became My Life’s Work</title>
-      <link>https://infraqo.com/blog/the-day-everything-went-dark</link>
-      <guid isPermaLink="true">https://infraqo.com/blog/the-day-everything-went-dark</guid>
+      <link>https://www.infraqo.com/blog/the-day-everything-went-dark</link>
+      <guid isPermaLink="true">https://www.infraqo.com/blog/the-day-everything-went-dark</guid>
       <pubDate>Mon, 08 Dec 2025 00:00:00 -0700</pubDate>
       <description><![CDATA[
-        Two hotels, one busy restaurant, and a nine-dollar switch holding everything together. 
+        Two hotels, one busy restaurant, and a nine-dollar switch holding everything together.
         The day it failed changed how Justin Burch thinks about infrastructure forever.
       ]]></description>
     </item>
