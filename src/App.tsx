@@ -75,7 +75,7 @@ const TitleManager: React.FC = () => {
         title =
           "The Day Everything Went Dark — and Why Infrastructure Became My Life’s Work | InfraQo";
         description =
-          "How a nine-dollar switch took down two hotels and a restaurant, and why Justin Burch became obsessed with preventing infrastructure failures.";
+          "How a nine-dollar switch took down two hotels and a restaurant, and why Justin became obsessed with preventing infrastructure failures.";
         break;
 
       case "/about":
@@ -130,7 +130,7 @@ const TitleManager: React.FC = () => {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       name: "InfraQo",
-      url: "https://infraqo.com",
+      url: "https://www.infraqo.com",
       telephone: "+1-720-515-4843",
       email: "support@infraqo.com",
       areaServed: "Colorado Front Range"

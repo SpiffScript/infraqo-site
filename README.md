@@ -1,20 +1,84 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# InfraQo Website
 
-# Run and deploy your AI Studio app
+This repository contains the source code for **infraqo.com**, the public-facing site for :contentReference[oaicite:0]{index=0}.
 
-This contains everything you need to run your app locally.
+InfraQo is a brand and operating division of QoLogic LLC.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1q6DGZHS2StGf3QhWzdWj61up4FkcfR8H
+QoLogic is the holding and operating framework behind the Qo ecosystem. It exists to enforce coherence across infrastructure, communication, and leadership systems—ensuring that tools, decisions, and execution align under real operational conditions. QoLogic does not sell services directly; it provides the standards, architecture, and governance that allow InfraQo, IndexQo, and SignalQo to operate with discipline, consistency, and intent.
 
-## Run Locally
+InfraQo exists to design, implement, and maintain physical and logical infrastructure that businesses rely on every day—networks, cabling, systems, and the environments they operate within. The site is intentionally practical and specific, reflecting the kind of work InfraQo does: foundational, durable, and outcome-driven.
 
-**Prerequisites:**  Node.js
+This is infrastructure work, not marketing.
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Tech Stack
+
+- Framework: Vite + React (TypeScript)
+- Styling: Tailwind CSS
+- Hosting: Cloudflare Pages
+- DNS / Edge: Cloudflare
+- Analytics: Google Analytics (gtag)
+- Schema: JSON-LD (Organization, LocalBusiness)
+
+---
+
+## Project Structure (High Level)
+
+- `index.html`  
+  Core document head (meta tags, analytics, schema).
+
+- `src/`  
+  Application source.  
+  - `components/` – Reusable UI and section components  
+  - `pages/` – Page-level assemblies (Landing, Services, Why InfraQo, Contact, etc.)  
+  - `styles/` – Global styles and Tailwind configuration  
+
+- `public/`  
+  Static assets (images, icons, verification files).
+
+---
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+Runs the site locally using Vite’s development server.
+
+## Deployment
+Deployment is handled automatically via Cloudflare Pages.
+ • Commits to the configured branch trigger builds.
+ • DNS is managed in Cloudflare.
+ • The apex domain uses Cloudflare’s proxied A-record setup for Pages.
+No manual deployment steps are required.
+
+---
+
+## Notes on Intent
+
+InfraQo is not positioned as a commodity IT provider.
+ • The site emphasizes reliability, clarity, and system integrity over speed or scale.
+ • Language is intentionally direct and non-hyped.
+ • The goal is informed inquiry, not volume lead generation.
+ • SEO is used to support discovery, not to dilute positioning.
+If something reads as generic, it likely does not reflect InfraQo’s standards.
+
+---
+
+## Status
+ • Initial public launch: November 2025
+ • Actively iterating copy, service descriptions, and supporting content
+ • No backwards-compatibility guarantees at this stage
+
+---
+
+## Contact
+
+support@infraqo.com
+
+---
+
+The Architecture of Continuity.
+
+(c) 2026 QoLogic LLC. All Rights Reserved.

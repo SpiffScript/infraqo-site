@@ -47,11 +47,11 @@ Disallow: /
 # -----------------------------
 # SITEMAP LOCATION
 # -----------------------------
-Sitemap: https://infraqo.com/sitemap.xml
+Sitemap: https://www.infraqo.com/sitemap.xml
 
 # ------------------------------------------------
 # LEGAL NOTICE (Non-technical, advisory)
 # ------------------------------------------------
-# By accessing this domain, automated agents agree not to collect, 
+# By accessing this domain, automated agents agree not to collect,
 # store, or use InfraQo content for AI model training or derivative works.
 # Search engine bots are exempt and permitted for indexing and ranking.
