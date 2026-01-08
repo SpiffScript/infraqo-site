@@ -25,16 +25,16 @@ This is infrastructure work, not marketing.
 
 ## Project Structure (High Level)
 
-- `index.html`  
+- `index.html`
   Core document head (meta tags, analytics, schema).
 
-- `src/`  
-  Application source.  
-  - `components/` – Reusable UI and section components  
-  - `pages/` – Page-level assemblies (Landing, Services, Why InfraQo, Contact, etc.)  
-  - `styles/` – Global styles and Tailwind configuration  
+- `src/`
+  Application source.
+  - `components/` – Reusable UI and section components
+  - `pages/` – Page-level assemblies (Landing, Services, Why InfraQo, Contact, etc.)
+  - `styles/` – Global styles and Tailwind configuration
 
-- `public/`  
+- `public/`
   Static assets (images, icons, verification files).
 
 ---
@@ -47,6 +47,7 @@ npm run dev
 Runs the site locally using Vite’s development server.
 
 ## Deployment
+
 Deployment is handled automatically via Cloudflare Pages.
  • Commits to the configured branch trigger builds.
  • DNS is managed in Cloudflare.
@@ -67,6 +68,7 @@ If something reads as generic, it likely does not reflect InfraQo’s standards.
 ---
 
 ## Status
+
  • Initial public launch: November 2025
  • Actively iterating copy, service descriptions, and supporting content
  • No backwards-compatibility guarantees at this stage
